@@ -1,0 +1,50 @@
+/*
+Esta es mi plantilla CSS para este proyecto y la uso para dar formas y colores
+que en scene builder no se pueden aplicar.
+*/
+/* 
+    
+    Autor: Derian Hernandez
+    Carnet: 2023346
+    Fecha de Creacion: 18/04/2024
+    Fecha de Actualizacion: 25/04/2024
+*/
+
+.menu-bar{
+    -fx-background-color: #a349a4;
+    -fx-opacity: 1;
+    -fx-border-width: 2.0;
+    
+}
+
+.button1 {
+    -fx-background-color: transparent;
+}
+
+.button2{
+    -fx-background-color: #4654A3;
+    -fx-border-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    
+}
+
+.button3:hover{
+    -fx-background-color: #a349a4;
+    -fx-font-size: 22px;
+    -fx-effect: dropshadow(three-pass-box, black, 20,0,0,0);
+}
+
+.button4:hover{
+    -fx-font-zise: 22px;    
+}
+
+.table-view .column-header,
+.table-view .column-header-background.filler{
+    -fx-cell-size: 20;
+    -fx-background-color: #a349a4;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #252440;
+}

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.derianhernandez.controllers.MenuProveedoresController">
+   <children>
+      <ImageView fitHeight="505.0" fitWidth="893.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/ProveedoresView.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="34.0" layoutY="80.0" prefHeight="241.0" prefWidth="210.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregarProveedor" alignment="CENTER" mnemonicParsing="false" onAction="#agregar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textFill="#fffefe" GridPane.halignment="CENTER">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnEliminarProveedor" alignment="CENTER" mnemonicParsing="false" onAction="#eliminar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnEditarProveedor" alignment="CENTER" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnReporte" alignment="CENTER" mnemonicParsing="false" onAction="#reporte" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <ImageView fx:id="imgAgregar" fitHeight="91.0" fitWidth="61.0" onMouseClicked="#agregar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/box+.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgEliminar" fitHeight="91.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/removeBox.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgEditar" fitHeight="54.0" fitWidth="54.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../images/boxEdit.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgReporte" fitHeight="79.0" fitWidth="55.0" onMouseClicked="#reporte" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../images/informe-seo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgEliminar1" fitHeight="91.0" fitWidth="60.0" layoutX="10.0" layoutY="72.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/removeBox.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <TableView fx:id="tblPr" layoutX="27.0" layoutY="328.0" onMouseClicked="#seleccionarElemento" prefHeight="152.0" prefWidth="790.0" stylesheets="@../resources/KampekiMarketCSS.css">
+        <columns>
+          <TableColumn fx:id="colCodigoProveedor" prefWidth="98.75" text="codigoProveedor" />
+          <TableColumn fx:id="colNitProveedor" prefWidth="98.75" text="nitProveedor" />
+            <TableColumn fx:id="colNombreProveedor" prefWidth="98.75" text="nombreProveedor" />
+            <TableColumn fx:id="colApellidoProveedor" prefWidth="98.75" text="apellidoProveedor" />
+            <TableColumn fx:id="colDireccionProveedor" prefWidth="98.75" text="direccionProveedor" />
+            <TableColumn fx:id="colRazonSocialProveedor" prefWidth="98.75" text="razonSocial" />
+            <TableColumn fx:id="colContactoPrincipalProveedor" prefWidth="98.75" text="contactoPrincipal" />
+            <TableColumn fx:id="colPaginaWebProveedor" prefWidth="98.75" text="paginaWeb" />
+        </columns>
+      </TableView>
+      <GridPane layoutX="212.0" layoutY="92.0" prefHeight="32.0" prefWidth="336.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Codigo Proveedor" />
+            <TextField fx:id="txtCodigoProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="137.0" prefHeight="32.0" prefWidth="336.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Nombres" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtNombreProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="177.0" prefHeight="32.0" prefWidth="336.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Apellidos" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtApellidoProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="219.0" prefHeight="32.0" prefWidth="336.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Direccion" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtDireccionProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="262.0" prefHeight="32.0" prefWidth="336.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Razon Social" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtRazonSocialProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="212.0" layoutY="294.0" prefHeight="32.0" prefWidth="336.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Pagina Web" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtPaginaWebProveedor" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="564.0" layoutY="137.0" prefHeight="32.0" prefWidth="296.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Nit" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtNitProveedor" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="564.0" layoutY="203.0" prefHeight="32.0" prefWidth="296.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Contacto " GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtContactoProveedor" prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnMenu" layoutX="801.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicMenu" prefHeight="54.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css">  
+         <graphic>
+            <ImageView fitHeight="69.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button2" />
+            <String fx:value="button3" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>
