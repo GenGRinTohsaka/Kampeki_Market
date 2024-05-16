@@ -460,6 +460,8 @@ Delimiter $$
     End $$
 Delimiter ;
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
-call sp_AgregarTipoProducto(1,'1');
+call sp_AgregarTipoProducto(1,'Es una vaca lola');
+call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');
+call sp_AgregarCompras(1,'2024/01/01','Es una vaquita lola con mucha carne','40.00');
 set global time_zone = '-6:00';
 call sp_ListarTipoProducto();
