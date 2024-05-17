@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.derianhernandez.views.ProductosViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.derianhernandez.controllers.ProductosViewController">
    <children>
       <ImageView fitHeight="647.0" fitWidth="1075.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,46 +32,46 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregarP" contentDisplay="CENTER" mnemonicParsing="false" onAction="#agregar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnAgregarP" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminarP" mnemonicParsing="false" onAction="#eliminar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminarP" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditarP" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEditarP" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reporte" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" onMouseClicked="#agregar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
+            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
                <image>
                   <Image url="@../images/agregar-usuario.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/quitar-usuario.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/editar-perfil.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" onMouseClicked="#reporte" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/informe-seo.png" />
                </image>
@@ -187,32 +186,31 @@
             <TextField fx:id="txtExistencia" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="264.0" layoutY="274.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="264.0" layoutY="274.0" prefHeight="59.0" prefWidth="324.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="201.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Codigo Tipo Producto" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtCodigoTP" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCTP" prefHeight="25.0" prefWidth="217.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="575.0" layoutY="273.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="606.0" layoutY="274.0" prefHeight="59.0" prefWidth="337.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="111.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Codigo Proveedor" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtCodigoPR" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCP" prefHeight="25.0" prefWidth="229.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <ComboBox layoutX="714.0" layoutY="346.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

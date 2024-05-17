@@ -20,6 +20,7 @@ import org.derianhernandez.controllers.MenuComprasController;
 import org.derianhernandez.controllers.MenuPrincipalController;
 import org.derianhernandez.controllers.MenuProveedoresController;
 import org.derianhernandez.controllers.MenuTipoProductoController;
+import org.derianhernandez.controllers.ProductosViewController;
 import org.derianhernandez.controllers.ProgramadorController;
 
 /**
@@ -167,6 +168,16 @@ public class Main extends Application {
         try{
             CargoEmpleadoController cargoEmpleadoView = (CargoEmpleadoController) cambiarEscena("CargoEmpleadoView.fxml", 915, 514);
             cargoEmpleadoView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Cargo Empleado");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+     
+     public void productosView(){
+        try{
+            ProductosViewController productosView = (ProductosViewController) cambiarEscena("ProductosView.fxml", 1076, 607);
+            productosView.setEscenarioPrincipal(this);
             this.escenarioPrincipal.setTitle("Cargo Empleado");
         } catch(Exception e){
             e.printStackTrace();

@@ -44,6 +44,9 @@ public class MenuPrincipalController implements Initializable {
     private MenuItem btnCompras;
     @FXML
     private MenuItem btnCargoEmpleado;
+    @FXML
+    private MenuItem btnProductos;
+    
 
     @FXML
     private void buttonHandleEvent(ActionEvent event) throws IOException {
@@ -60,6 +63,8 @@ public class MenuPrincipalController implements Initializable {
             escenarioPrincipal.comprasView();
         } else if (event.getSource() == btnCargoEmpleado){
             escenarioPrincipal.cargoEmpleadoView();
+        } else if (event.getSource() == btnProductos){
+            escenarioPrincipal.productosView();
         }
 
     }

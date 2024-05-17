@@ -459,6 +459,47 @@ Delimiter $$
         where codigoCargoEmpleado = _codigoCargoEmpleado;
     End $$
 Delimiter ;
+
+Delimiter $$
+	create procedure sp_AgregarProducto(in codigoProducto varchar(15), in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(45),
+    in existencia int, in codigoTipoProducto int, in codigoProveedor int)
+    Begin
+		Insert Into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
+        values(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ListarProductos()
+    Begin
+		select
+			P.codigoProducto,
+            P.descripcionProducto,
+            P.precioUnitario,
+            P.precioDocena,
+            P.precioMayor,
+            P.imagenProducto,
+            P.existencia,
+            P.codigoTipoProducto,
+            P.codigoProveedor
+		from Productos P;
+    End $$
+Delimiter ;
+
+delimiter $$
+
+create procedure sp_buscarTipoProducto (in _codigoTipoProducto int)
+	Begin
+		select
+			TP.codigoTipoProducto,
+			TP.descripcionProducto
+		from
+        TipoProducto TP
+		where
+        TP.codigoTipoProducto = _codigoTipoProducto;
+	End $$
+Delimiter ;
+
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
 call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');
