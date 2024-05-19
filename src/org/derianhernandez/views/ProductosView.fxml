@@ -32,7 +32,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregarP" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnAgregarP" contentDisplay="CENTER" mnemonicParsing="false" onAction="#agregar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
@@ -56,19 +56,19 @@
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
+            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" onMouseClicked="#agregar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
                <image>
-                  <Image url="@../images/agregar-usuario.png" />
+                  <Image url="@../images/product+.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/quitar-usuario.png" />
+                  <Image url="@../images/product-.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/editar-perfil.png" />
+                  <Image url="@../images/productDelete.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
@@ -81,14 +81,14 @@
       <TableView fx:id="tblP" layoutX="186.0" layoutY="389.0" onMouseClicked="#seleccionarElemento" prefHeight="194.0" prefWidth="841.0" stylesheets="@../resources/KampekiMarketCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoP" minWidth="93.44" prefWidth="75.0" text="Codigo Producto" />
-            <TableColumn fx:id="colPrecioM" minWidth="93.44" prefWidth="75.0" text="Descripcion Producto" />
+            <TableColumn fx:id="colDescripcionP" minWidth="93.44" prefWidth="75.0" text="Descripcion Producto" />
             <TableColumn fx:id="colPrecioU" minWidth="93.44" prefWidth="75.0" text="Precio Unitario" />
-            <TableColumn fx:id="colDescripcionP" minWidth="93.44" prefWidth="75.0" text="Precio Docena" />
-            <TableColumn fx:id="colPrecioD" minWidth="93.44" prefWidth="75.0" text="Precio Mayor" />
-            <TableColumn fx:id="colExistenciaP" minWidth="93.44" prefWidth="75.0" text="Imagen Producto" />
-            <TableColumn fx:id="colCodigoTP" minWidth="93.44" prefWidth="75.0" text="Existencia" />
-            <TableColumn fx:id="colCodigoPR" minWidth="93.44" prefWidth="75.0" text="Codigo Tipo Producto" />
-            <TableColumn fx:id="colImagenP" minWidth="93.44" prefWidth="75.0" text="Codigo Proveedor" />
+            <TableColumn fx:id="colPrecioD" minWidth="93.44" prefWidth="75.0" text="Precio Docena" />
+            <TableColumn fx:id="colPrecioM" minWidth="93.44" prefWidth="75.0" text="Precio Mayor" />
+            <TableColumn fx:id="colImagenP" minWidth="93.44" prefWidth="75.0" text="Imagen Producto" />
+            <TableColumn fx:id="colExistenciaP" minWidth="93.44" prefWidth="75.0" text="Existencia" />
+            <TableColumn fx:id="colCodigoTP" minWidth="93.44" prefWidth="75.0" text="Codigo Tipo Producto" />
+            <TableColumn fx:id="colCodigoPR" minWidth="93.44" prefWidth="75.0" text="Codigo Proveedor" />
          </columns>
          <styleClass>
             <String fx:value="table-row-cell" />
@@ -186,30 +186,30 @@
             <TextField fx:id="txtExistencia" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="264.0" layoutY="274.0" prefHeight="59.0" prefWidth="324.0">
+      <GridPane layoutX="264.0" layoutY="274.0" prefHeight="59.0" prefWidth="598.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="123.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="201.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="384.0" minWidth="0.0" prefWidth="131.60003662109375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.39996337890625" minWidth="0.0" prefWidth="466.39996337890625" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Codigo Tipo Producto" GridPane.halignment="CENTER" />
-            <ComboBox fx:id="cmbCTP" prefHeight="25.0" prefWidth="217.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCTP" prefHeight="26.0" prefWidth="452.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="606.0" layoutY="274.0" prefHeight="59.0" prefWidth="337.0">
+      <GridPane layoutX="257.0" layoutY="329.0" prefHeight="59.0" prefWidth="686.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="111.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.8" minWidth="0.0" prefWidth="104.5999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="615.2" minWidth="0.0" prefWidth="581.6000244140625" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Codigo Proveedor" GridPane.halignment="CENTER" />
-            <ComboBox fx:id="cmbCP" prefHeight="25.0" prefWidth="229.0" GridPane.columnIndex="1" />
+            <Label prefHeight="14.0" prefWidth="109.0" text="Codigo Proveedor" GridPane.halignment="CENTER" />
+            <ComboBox fx:id="cmbCP" prefHeight="26.0" prefWidth="610.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

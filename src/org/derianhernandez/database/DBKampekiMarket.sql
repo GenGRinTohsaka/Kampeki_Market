@@ -486,20 +486,36 @@ Delimiter $$
     End $$
 Delimiter ;
 
-delimiter $$
+Delimiter $$
 
-create procedure sp_buscarTipoProducto (in _codigoTipoProducto int)
-	Begin
-		select
-			TP.codigoTipoProducto,
-			TP.descripcionProducto
-		from
-        TipoProducto TP
-		where
-        TP.codigoTipoProducto = _codigoTipoProducto;
+	create procedure sp_buscarTipoProducto (in _codigoTipoProducto int)
+		Begin
+			select
+				TP.codigoTipoProducto,
+				TP.descripcionProducto
+			from
+				TipoProducto TP
+			where TP.codigoTipoProducto = _codigoTipoProducto;
 	End $$
 Delimiter ;
 
+Delimiter $$
+	create procedure sp_BuscarProveedor (in _codigoProveedor int)
+		Begin
+			select
+				P.codigoProveedor,
+                P.nitProveedor,
+                P.nombreProveedor,
+                P.apellidoProveedor,
+                P.direccionProveedor,
+                P.razonSocial,
+                P.contactoPrincipal,
+                P.paginaWeb
+			from
+				Proveedores P
+			where _codigoProveedor = P.codigoProveedor;
+        End $$
+Delimiter ;
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
 call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');

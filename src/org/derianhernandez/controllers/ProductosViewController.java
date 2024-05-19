@@ -21,9 +21,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import org.derianhernandez.bean.Productos;
 import org.derianhernandez.bean.Proveedores;
 import org.derianhernandez.bean.TipoProducto;
@@ -189,47 +188,93 @@ public class ProductosViewController implements Initializable {
         colPrecioU.setCellValueFactory(new PropertyValueFactory<Productos, Double>("precioUnitario"));
         colPrecioD.setCellValueFactory(new PropertyValueFactory<Productos, Double>("precioDocena"));
         colPrecioM.setCellValueFactory(new PropertyValueFactory<Productos, Double>("precioMayor"));
+        colImagenP.setCellValueFactory(new PropertyValueFactory<Productos, String>("imagenProducto"));
         colExistenciaP.setCellValueFactory(new PropertyValueFactory<Productos, Integer>("existencia"));
         colCodigoTP.setCellValueFactory(new PropertyValueFactory<Productos, Integer>("codigoTipoProducto"));
         colCodigoPR.setCellValueFactory(new PropertyValueFactory<Productos, Integer>("codigoProveedor"));
     }
-    
-    public void seleccionarElemento(){
-        txtCodigoCP.setText(((Productos)tblP.getSelectionModel().getSelectedItem()).getCodigoProducto());
-        txtDescripcionP.setText(((Productos)tblP.getSelectionModel().getSelectedItem()).getDescripcionProducto());
-        txtPrecioU.setText(String.valueOf(((Productos)tblP.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
-        txtPrecioD.setText(String.valueOf(((Productos)tblP.getSelectionModel().getSelectedItem()).getPrecioDocena()));
-        txtPrecioM.setText(String.valueOf(((Productos)tblP.getSelectionModel().getSelectedItem()).getPrecioMayor()));
-        txtExistencia.setText(String.valueOf(((Productos)tblP.getSelectionModel().getSelectedItem()).getExistencia()));
-        cmbCTP.getSelectionModel().select(buscarTipoProducto(((Productos)tblP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
-        
+
+    public void seleccionarElemento() {
+        txtCodigoCP.setText(((Productos) tblP.getSelectionModel().getSelectedItem()).getCodigoProducto());
+        txtDescripcionP.setText(((Productos) tblP.getSelectionModel().getSelectedItem()).getDescripcionProducto());
+        txtPrecioU.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
+        txtPrecioD.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioDocena()));
+        txtPrecioM.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioMayor()));
+        txtImagen.setText(((Productos) tblP.getSelectionModel().getSelectedItem()).getImagenProducto());
+        txtExistencia.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getExistencia()));
+        cmbCTP.getSelectionModel().select(buscarTipoProducto(((Productos) tblP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
+        cmbCP.getSelectionModel().select(buscarProveedor(((Productos) tblP.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
+
     }
-    
-    public TipoProducto buscarTipoProducto (int codigoTipoProducto){
+
+    public TipoProducto buscarTipoProducto(int codigoTipoProducto) {
         TipoProducto resultado = null;
-        try{
+        try {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_buscarTipoProducto(?)}");
             procedimiento.setInt(1, codigoTipoProducto);
             ResultSet registro = procedimiento.executeQuery();
-            while(registro.next()){
+            while (registro.next()) {
                 resultado = new TipoProducto(registro.getInt("codigoTipoProducto"),
-                                             registro.getString("descripcion"));
-                                            
+                        registro.getString("descripcion"));
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return resultado;
     }
-    
-    public Proveedores buscarProveedor(int codigoProveedor){
+
+    public Proveedores buscarProveedor(int codigoProveedor) {
         Proveedores resultado = null;
-        try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_BuscarProveedor()}");
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_BuscarProveedor(?)}");
+            procedimiento.setInt(1, codigoProveedor);
+            ResultSet registro = procedimiento.executeQuery();
+            while (registro.next()) {
+                resultado = new Proveedores(registro.getInt("codigoProveedor"),
+                        registro.getString("nitProveedor"),
+                        registro.getString("nombreProveedor"),
+                        registro.getString("apellidoProveedor"),
+                        registro.getString("direccionProveedor"),
+                        registro.getString("razonSocial"),
+                        registro.getString("contactoPrincipal"),
+                        registro.getString("paginaWeb"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }catch(){
-}
-}
+        return resultado;
+    }
+
+    public void agregar() {
+        switch (tipoDeOperaciones) {
+            case NINGUNO:
+                activarControles();
+                btnAgregarP.setText("Guardar");
+                btnEliminarP.setText("Cancelar");
+                imgAgregar.setImage(new Image("/org/derianhernandez/images/Guardar.png"));
+                imgEliminar.setImage(new Image("/org/derianhernandez/images/Eliminar2.png"));
+                btnEditarP.setDisable(true);
+                btnReportes.setDisable(true);
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
+                break;
+            case ACTUALIZAR:
+                guardar();
+                desactivarControles();
+                limpiarControles();
+                btnAgregarP.setText("Agregar");
+                btnEliminarP.setText("Eliminar");
+                imgAgregar.setImage(new Image("/org/derianhernandez/images/product+.png"));
+                imgEliminar.setImage(new Image("/org/derianhernandez/images/product-.png"));
+                btnEditarP.setDisable(false);
+                btnReportes.setDisable(false);
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargaDatos();
+                break;
+        }
+
+    }
 
     public void desactivarControles() {
         txtCodigoCP.setEditable(false);
@@ -266,6 +311,36 @@ public class ProductosViewController implements Initializable {
         cmbCTP.getSelectionModel().getSelectedItem();
         cmbCP.getSelectionModel().getSelectedItem();
 
+    }
+
+    public void guardar() {
+        Productos registro = new Productos();
+        registro.setCodigoProducto(txtCodigoCP.getText());
+         registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+        registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+        registro.setDescripcionProducto(txtDescripcionP.getText());
+        registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
+        registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
+        registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
+        registro.setImagenProducto(txtImagen.getText());
+        registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarProducto(?, ?, ?, ?, ?, ?, ?, ?,?)}");
+            procedimiento.setString(1, registro.getCodigoProducto());
+            procedimiento.setString(2, registro.getDescripcionProducto());
+            procedimiento.setDouble(3, registro.getPrecioUnitario());
+            procedimiento.setDouble(4, registro.getPrecioDocena());
+            procedimiento.setDouble(5, registro.getPrecioMayor());
+            procedimiento.setString(6, registro.getImagenProducto());
+            procedimiento.setInt(7, registro.getExistencia());
+            procedimiento.setInt(8, registro.getCodigoTipoProducto());
+            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.executeQuery();
+
+            listaProductos.add(registro);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
