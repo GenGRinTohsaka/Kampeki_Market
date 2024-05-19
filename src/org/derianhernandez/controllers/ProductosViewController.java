@@ -98,6 +98,9 @@ public class ProductosViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargaDatos();
+        cmbCTP.setItems(getTipoProducto());
+        cmbCP.setItems(getProveedores());
+        desactivarControles();
     }
 
     private Main escenarioPrincipal;
@@ -285,7 +288,7 @@ public class ProductosViewController implements Initializable {
         txtExistencia.setEditable(false);
         cmbCTP.setDisable(true);
         cmbCP.setDisable(true);
-
+        txtImagen.setEditable(false);
     }
 
     public void activarControles() {
@@ -297,7 +300,7 @@ public class ProductosViewController implements Initializable {
         txtExistencia.setEditable(true);
         cmbCTP.setDisable(false);
         cmbCP.setDisable(false);
-
+        txtImagen.setEditable(true);
     }
 
     public void limpiarControles() {
@@ -310,20 +313,22 @@ public class ProductosViewController implements Initializable {
         tblP.getSelectionModel().getSelectedItem();
         cmbCTP.getSelectionModel().getSelectedItem();
         cmbCP.getSelectionModel().getSelectedItem();
+        txtImagen.clear();
 
     }
 
     public void guardar() {
         Productos registro = new Productos();
         registro.setCodigoProducto(txtCodigoCP.getText());
-         registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
-        registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
         registro.setDescripcionProducto(txtDescripcionP.getText());
         registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
         registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
         registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
         registro.setImagenProducto(txtImagen.getText());
         registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+        registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+        registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarProducto(?, ?, ?, ?, ?, ?, ?, ?,?)}");
             procedimiento.setString(1, registro.getCodigoProducto());
@@ -335,7 +340,7 @@ public class ProductosViewController implements Initializable {
             procedimiento.setInt(7, registro.getExistencia());
             procedimiento.setInt(8, registro.getCodigoTipoProducto());
             procedimiento.setInt(9, registro.getCodigoProveedor());
-            procedimiento.executeQuery();
+            procedimiento.execute();
 
             listaProductos.add(registro);
         } catch (Exception e) {

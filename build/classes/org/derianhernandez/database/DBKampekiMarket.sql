@@ -492,7 +492,7 @@ Delimiter $$
 		Begin
 			select
 				TP.codigoTipoProducto,
-				TP.descripcionProducto
+				TP.descripcion
 			from
 				TipoProducto TP
 			where TP.codigoTipoProducto = _codigoTipoProducto;
@@ -520,5 +520,6 @@ call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser c
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
 call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');
 call sp_AgregarCompras(1,'2024/01/01','Es una vaquita lola con mucha carne','40.00');
+call sp_AgregarProducto('1','Es una vaca lola xD',12,12,12,'xD',1,1,1);
 set global time_zone = '-6:00';
 call sp_ListarTipoProducto();
