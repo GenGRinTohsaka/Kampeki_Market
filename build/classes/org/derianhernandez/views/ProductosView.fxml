@@ -38,19 +38,19 @@
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminarP" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminarP" mnemonicParsing="false" onAction="#eliminar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditarP" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEditarP" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reporte" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
@@ -61,17 +61,17 @@
                   <Image url="@../images/product+.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/product-.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/productDelete.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" onMouseClicked="#reporte" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/informe-seo.png" />
                </image>

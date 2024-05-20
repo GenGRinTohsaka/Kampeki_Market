@@ -500,6 +500,25 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
+	create procedure  sp_editarProducto(in _codigoProducto varchar(15), in _descripcionProducto varchar(45), in _precioUnitario decimal(10,2), in _precioDocena decimal(10,2), in _precioMayor decimal(10,2), in _imagenProducto varchar(45),
+    in _existencia int, in _codigoTipoProducto int, in _codigoProveedor int)
+    Begin
+		Update productos P
+			set
+				P.descripcionProducto = _descripcionProducto,
+				P.precioUnitario = _precioUnitario,
+                P.precioDocena = _precioDocena,
+                P.precioMayor = _precioMayor,
+                P.imagenProducto = _imagenProducto,
+                P.existencia = _existencia,
+                P.codigoTipoProducto = _codigoTipoProducto,
+                P.codigoProveedor = _codigoProveedor
+			where P.codigoProducto = _codigoProducto;
+				
+    End $$
+Delimiter ;
+
+Delimiter $$
 	create procedure sp_BuscarProveedor (in _codigoProveedor int)
 		Begin
 			select

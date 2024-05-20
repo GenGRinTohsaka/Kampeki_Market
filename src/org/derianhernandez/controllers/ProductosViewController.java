@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.swing.JOptionPane;
 import org.derianhernandez.bean.Productos;
 import org.derianhernandez.bean.Proveedores;
 import org.derianhernandez.bean.TipoProducto;
@@ -97,7 +98,7 @@ public class ProductosViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargaDatos();
+        cargarDatos();
         cmbCTP.setItems(getTipoProducto());
         cmbCP.setItems(getProveedores());
         desactivarControles();
@@ -184,7 +185,7 @@ public class ProductosViewController implements Initializable {
 
     }
 
-    public void cargaDatos() {
+    public void cargarDatos() {
         tblP.setItems(getProducto());
         colCodigoP.setCellValueFactory(new PropertyValueFactory<Productos, String>("codigoProducto"));
         colDescripcionP.setCellValueFactory(new PropertyValueFactory<Productos, String>("descripcionProducto"));
@@ -253,6 +254,7 @@ public class ProductosViewController implements Initializable {
     public void agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
+                limpiarControles();
                 activarControles();
                 btnAgregarP.setText("Guardar");
                 btnEliminarP.setText("Cancelar");
@@ -273,10 +275,102 @@ public class ProductosViewController implements Initializable {
                 btnEditarP.setDisable(false);
                 btnReportes.setDisable(false);
                 tipoDeOperaciones = operaciones.NINGUNO;
-                cargaDatos();
+                cargarDatos();
                 break;
         }
 
+    }
+
+    public void eliminar() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                btnAgregarP.setText("Agregar");
+                btnAgregarP.setText("Agregar");
+                btnEliminarP.setText("Eliminar");
+                imgAgregar.setImage(new Image("/org/derianhernandez/images/product+.png"));
+                imgEliminar.setImage(new Image("/org/derianhernandez/images/product-.png"));
+                btnEditarP.setDisable(false);
+                btnReportes.setDisable(false);
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+        }
+    }
+
+    public void editar() {
+        switch (tipoDeOperaciones) {
+            case NINGUNO:
+                if (tblP.getSelectionModel().getSelectedItem() != null) {
+                    btnEditarP.setText("Actualizar");
+                    btnReportes.setText("Cancelar");
+                    btnAgregarP.setDisable(true);
+                    btnEliminarP.setDisable(true);
+                    imgEditar.setImage(new Image("/org/derianhernandez/images/editarCaja.png"));
+                    imgReporte.setImage(new Image("/org/derianhernandez/images/Eliminar2.png"));
+                    activarControles();
+                    txtCodigoCP.setEditable(false);
+                    tipoDeOperaciones = ProductosViewController.operaciones.ACTUALIZAR;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe de seleccionar algun elemento");
+                }
+                break;
+            case ACTUALIZAR:
+                actualizar();
+                desactivarControles();
+                limpiarControles();
+                btnEditarP.setText("Editar");
+                btnReportes.setText("Reportes");
+                btnAgregarP.setDisable(false);
+                btnEliminarP.setDisable(false);
+                imgEditar.setImage(new Image("/org/derianhernandez/images/productDelete.png"));
+                imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
+                break;
+        }
+    }
+
+    public void reporte() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditarP.setText("Editar");
+                btnReportes.setText("Reportes");
+                btnAgregarP.setDisable(false);
+                btnEliminarP.setDisable(false);
+                imgEditar.setImage(new Image("/org/derianhernandez/images/productDelete.png"));
+                imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+        }
+    }
+
+    public void actualizar() {
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_editarProducto(?,?,?,?,?,?,?,?,?)}");
+            Productos registro = (Productos) tblP.getSelectionModel().getSelectedItem();
+            registro.setDescripcionProducto(txtDescripcionP.getText());
+            registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
+            registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
+            registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
+            registro.setImagenProducto(txtImagen.getText());
+            registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+            registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+            registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+            procedimiento.setString(1, registro.getCodigoProducto());
+            procedimiento.setString(2, registro.getDescripcionProducto());
+            procedimiento.setDouble(3, registro.getPrecioUnitario());
+            procedimiento.setDouble(4, registro.getPrecioDocena());
+            procedimiento.setDouble(5, registro.getPrecioMayor());
+            procedimiento.setString(6, registro.getImagenProducto());
+            procedimiento.setInt(7, registro.getExistencia());
+            procedimiento.setInt(8, registro.getCodigoTipoProducto());
+            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void desactivarControles() {
