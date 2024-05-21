@@ -535,10 +535,173 @@ Delimiter $$
 			where _codigoProveedor = P.codigoProveedor;
         End $$
 Delimiter ;
+
+Delimiter $$
+	create procedure sp_AgregarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
+		Begin
+			Insert Into detallecompra(codigoDetalleCompra,costoUnitario,cantidad,codigoProducto,numeroDocumento)
+				values (codigoDetalleCompra,costoUnitario,cantidad,codigoProducto,numeroDocumento);
+        End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ListarDetalleCompra()
+    Begin
+		Select 
+			DC.codigoDetalleCompra,
+			DC.costoUnitario,
+            DC.cantidad,
+            DC.codigoProducto,
+            DC.numeroDocumento
+		from DetalleCompra DC;
+	End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarDetalleCompra(in _codigoDetalleCompra int)
+		Begin
+			Select 
+				DC.codigoDetalleCompra,
+				DC.costoUnitario,
+				DC.cantidad,
+				DC.codigoProducto,
+				DC.numeroDocumento
+			from DetalleCompra DC
+			where DC.codigoDetalleCompra = _codigoDetalleComrpa;
+        End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EditarDetalleCompra(in _codigoDetalleCompra int, in _costoUnitario decimal(10,2), in _cantidad int, in _codigoProducto varchar(15), in numeroDocumento int)
+		Begin
+			Update DetalleCompra DC
+				set
+					DC.costoUnitario = _costoUnitario,
+                    DC.cantidad = _cantidad,
+                    DC.codigoProducto = _codigoProducto,
+                    DC.numeroDocumento = _numeroDocumento
+				where DC.codigoDetalleCompra = _codigoDetalleCompra;
+        End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EliminarDetalleCompra(in _codigoDetalleCompra int)
+    Begin
+		Delete from DetalleCompra
+        where codigoDetalleCompra = _codigoDetalleCompra;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create function fn_CalcularPrecioUnitario(codigoProducto varchar(15)) returns decimal(10,2)
+	reads sql data deterministic
+    Begin
+		DECLARE precioUnitario decimal(10,2);
+        Select (DC.costoUnitario)
+        into precioUnitario 
+        from  DetalleCompra DC where DC.codigoProducto = codigoProducto;
+        
+        return precioUnitario + (precioUnitario * 0.40);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create function fn_CalcularPrecioDocena(codigoProducto varchar(15)) returns decimal(10,2)
+    reads sql data deterministic
+    Begin
+		Declare precioDocena decimal(10,2);
+        Select (DC.costoUnitario)
+        into precioDocena
+        from DetalleCompra DC where DC.codigoProducto = codigoProducto;
+        return precioDocena + (precioDocena * 0.35);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create function fn_CalcularPrecioMayor(codigoProducto varchar(15)) returns decimal(10,2)
+    reads sql data deterministic
+    Begin
+		Declare precioMayor decimal(10,2);
+        Select (DC.costoUnitario)
+        into precioMayor
+        from DetalleCompra DC where DC.codigoProducto = codigoProducto;
+        return precioMayor + (precioMayor * 0.25);
+    End $$
+Delimiter ;
+Delimiter $$
+	create procedure sp_AsignarPrecios(in codigoProducto varchar(15))
+    Begin
+		Declare _precioDocena decimal(10,2);
+		Declare _precioUnitario decimal(10,2);
+        Declare _precioMayor decimal(10,2);
+        set _precioMayor = fn_CalcularPrecioMayor(codigoProducto);
+        set _precioUnitario = fn_CalcularPrecioUnitario(codigoProducto);
+        set _precioDocena = fn_CalcularPrecioDocena(codigoProducto);
+        
+        Update Productos P
+        set
+        P.precioUnitario = _precioUnitario,
+        P.precioDocena = _precioDocena,
+        P.precioMayor = _precioMayor
+        where P.codigoProducto = codigoProducto; 
+    End $$
+Delimiter ;
+
+Delimiter $$
+	Create Trigger tr_DetalleCompra_After_Insert
+    After Insert on DetalleCompra
+    for each row
+    Begin
+        call sp_AsignarPrecios(NEW.codigoProducto);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create function fn_TotalCompras( numeroDocumento int)
+	returns decimal(10,2)
+    reads sql data deterministic
+    Begin
+		declare totalDocumento decimal(10,2);
+        Select SUM(DC.costoUnitario * DC.cantidad) into totalDocumento from  DetalleCompra DC where DC.numeroDocumento = numeroDocumento;
+		
+        return totalDocumento;
+	End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_AsignarTotalCompras(in numeroDocumento int)
+    Begin
+		Declare _totalDocumento decimal(10,2);
+        set _totalDocumento = fn_TotalCompras(numeroDocumento);
+        
+        Update Compras C
+        set
+        C.totalDocumento = _totalDocumento
+        where C.numeroDocumento = numeroDocumento; 
+    End $$
+Delimiter ;
+
+Delimiter $$
+	Create Trigger tr_DetalleComprasTotal_After_Insert
+    After Insert on DetalleCompra
+    for each row
+    Begin
+		call sp_AsignarTotalCompras(new.numeroDocumento);
+	End $$
+Delimiter ;	
+
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
+call sp_AgregarTipoProducto(2,'Es un cerdo');
 call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');
-call sp_AgregarCompras(1,'2024/01/01','Es una vaquita lola con mucha carne','40.00');
-call sp_AgregarProducto('1','Es una vaca lola xD',12,12,12,'xD',1,1,1);
+call sp_AgregarCompras(1,'2024/01/01','Es una vaquita lola con mucha carne',0);
+call sp_AgregarCompras(2,'2024/01/01','Es una vaca lechera',0);
+call sp_AgregarProducto('1','Es una vaca lola xD',0,0,0,'xD',1,1,1);
+call sp_AgregarProducto('2','Es una vaca',0,0,0,'xD',1,1,1);
+call sp_AgregarDetalleCompra(1,12.00,3,'1',1);
+call sp_AgregarDetalleCompra(2,10.00,1,'2',1);
 set global time_zone = '-6:00';
+
 call sp_ListarTipoProducto();
+call sp_ListarProductos();
+call sp_ListarCompras();
