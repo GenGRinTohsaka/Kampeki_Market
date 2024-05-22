@@ -46,7 +46,12 @@ public class MenuPrincipalController implements Initializable {
     private MenuItem btnCargoEmpleado;
     @FXML
     private MenuItem btnProductos;
-    
+    @FXML
+    private MenuItem btnEmpleados;
+    @FXML
+    private MenuItem btnFacturas;
+    @FXML
+    private MenuItem btnDetalleFactura; 
 
     @FXML
     private void buttonHandleEvent(ActionEvent event) throws IOException {
@@ -65,6 +70,14 @@ public class MenuPrincipalController implements Initializable {
             escenarioPrincipal.cargoEmpleadoView();
         } else if (event.getSource() == btnProductos){
             escenarioPrincipal.productosView();
+        } else if (event.getSource() == btnEmpleados){
+            escenarioPrincipal.EmpleadosView();
+        } else if (event.getSource() == btnClientes){
+            escenarioPrincipal.menuClientesView();
+        } else if (event.getSource() == btnFacturas){
+            escenarioPrincipal.facturaView();
+        } else if (event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.detalleFacturaView();
         }
 
     }

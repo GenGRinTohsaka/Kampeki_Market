@@ -15,6 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.derianhernandez.controllers.CargoEmpleadoController;
+import org.derianhernandez.controllers.DetalleFacturaViewController;
+import org.derianhernandez.controllers.EmpleadosViewController;
+import org.derianhernandez.controllers.FacturasViewController;
 import org.derianhernandez.controllers.MenuClientesController;
 import org.derianhernandez.controllers.MenuComprasController;
 import org.derianhernandez.controllers.MenuPrincipalController;
@@ -184,4 +187,33 @@ public class Main extends Application {
         }
     }
    
+    public void EmpleadosView(){
+        try{
+            EmpleadosViewController empleadosView = (EmpleadosViewController) cambiarEscena("EmpleadosView.fxml",954,538);
+            empleadosView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Empleados");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void facturaView(){
+        try{
+            FacturasViewController facturaView = (FacturasViewController) cambiarEscena("FacturasView.fxml",1014,572);
+            facturaView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Facturas");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void detalleFacturaView(){
+        try{
+            DetalleFacturaViewController detalleFacturaView = (DetalleFacturaViewController) cambiarEscena("DetalleFacturaView.fxml",1045,587);
+            detalleFacturaView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Detalle Factura");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

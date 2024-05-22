@@ -535,7 +535,7 @@ Delimiter $$
 			where _codigoProveedor = P.codigoProveedor;
         End $$
 Delimiter ;
-
+-- -------------------------------------------------------------Detalle Compra --------------------------------------------------------------------
 Delimiter $$
 	create procedure sp_AgregarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
 		Begin
@@ -591,6 +591,192 @@ Delimiter $$
         where codigoDetalleCompra = _codigoDetalleCompra;
     End $$
 Delimiter ;
+-- -----------------------------------------------------------------------------------------------------------------------------
+-- ----------------------------------- FACTURA -------------------------------------------------------------------
+-- ----------------------------------- AGREGAR ------------------------------------
+Delimiter $$
+	create procedure sp_AgregarFactura(in numeroFactura int, estado varchar(50), totalFactura decimal(10,2), fechaFactura varchar(45), codigoCliente int, codigoEmpleado int)
+    Begin
+		Insert into Factura(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado)
+        values(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado);
+	End $$
+Delimiter ;
+
+-- ----------------------------------- LISTAR ---------------------------------------
+Delimiter $$
+	create procedure sp_ListarFactura()
+    Begin
+		Select
+		F.numeroFactura,
+		F.estado,
+		F.totalFactura,
+		F.fechaFactura,
+		F.codigoCliente,
+		F.codigoEmpleado
+		From Factura F;
+    End $$
+Delimiter ;
+
+-- ----------------------------------- BUSCAR -----------------------------------------
+Delimiter $$
+	create procedure sp_BuscarFactura(in numeroFactura int)
+    Begin
+		Select
+		F.estado,
+		F.totalFactura,
+		F.fechaFactura,
+		F.codigoCliente,
+		F.codigoEmpleado
+		From Factura F 
+        Where numeroFactura = numeroFactura;
+	End $$
+Delimiter ;
+        
+-- ---------------------------------- ELIMINAR ---------------------------------------
+Delimiter $$
+	create procedure sp_EliminarFactura(in numeroFactura int)
+    Begin
+		Delete from Factura 
+        Where numeroFactura = numeroFactura;
+	End $$
+Delimiter ;
+
+-- --------------------------------- EDITAR ------------------------------------------
+Delimiter $$
+	create procedure sp_EditarFactura(in _numeroFactura int, _estado varchar(50), _totalFactura decimal(10,2), _fechaFactura varchar(45), _codigoCliente int, _codigoEmpleado int)
+    Begin
+		Update Factura F
+        set
+        estado = _estado,
+        totalFactura = _totalFactura,
+        fechaFactura = _fechaFactura,
+        codigoCliente = _codigoCliente,
+        codigoEmpleado = _codigoEmpleado
+        Where numeroFactura = _numeroFactura;
+	End $$
+Delimiter ;
+
+-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------- Empleados -------------------------------------------------------------------------------------------------
+Delimiter $$
+	create procedure sp_AgregarEmpleados(in codigoEmpleado int,in nombresEmpelado varchar(50), in apellidosEmpleado varchar(50), in sueldo decimal(10,2),  in direccion varchar(150), in turno varchar(15), in codigoCargoEmpleado int)
+    Begin
+		Insert into Empleados(codigoEmpleado,nombresEmpleado,apellidosEmpleado,sueldo,direccion,turno,codigoCargoEmpleado)
+			values(codigoEmpleado,nombresEmpleado,apellidosEmpleado,sueldo,direccion,turno,codigoCargoEmpleado);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ListarEmpleados()
+    Begin
+		Select
+			E.codigoEmpleado,
+            E.nombresEmpleado,
+            E.apellidosEmpleado,
+            E.sueldo,
+            E.direccion,
+            E.turno,
+            E.codigoCargoEmpleado
+		from Empleados E;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarEmpleados(in _codigoEmpleado int)
+	Begin
+		Select
+			E.codigoEmpleado,
+            E.nombresEmpleado,
+            E.apellidosEmpleado,
+            E.sueldo,
+            E.direccion,
+            E.turno,
+            E.codigoCargoEmpleado
+		from Empleados E
+        where E.codigoEmpleado = _codigoEmpleado;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EditarEmpleados(in _codigoEmpleado int,in _nombresEmpelado varchar(50), in _apellidosEmpleado varchar(50), in _sueldo decimal(10,2),  in _direccion varchar(150), in _turno varchar(15), in _codigoCargoEmpleado int)
+    Begin
+		Update Empleados E
+        Set
+            E.nombresEmpleado = _nombresEmpleado,
+            E.apellidosEmpleado = _apellidosEmpleado,
+            E.sueldo = _sueldo,
+            E.direccion = _direccion,
+            E.turno = _turno,
+            E.codigoCargoEmpleado = _codigoCargoEmpleado
+		where E.codigoEmpleado = _codigoEmpleado;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EliminarEmpleados(in _codigoEmpleado int)
+    Begin
+		Delete from Empleados
+        where codigoEmpleado = _codigoEmpleado;
+    End $$
+Delimiter ;
+-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------- Detalle Factura ----------------------------------------------------------------------------------------------------------------
+Delimiter $$
+	create procedure sp_AgregarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2), in cantidad int,in numeroFactura int ,in codigoProducto varchar(15))
+	Begin
+		Insert into DetalleFactura(codigoDetalleFactura,precioUnitario,cantidad,numeroFactura,codigoProducto)
+			values(codigoDetalleFactura,precioUnitario,cantidad,numeroFactura,codigoProducto);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ListarDetalleFactura()
+    Begin
+		Select
+			DF.codigoDetalleFactura,
+			DF.precioUnitario,
+            DF.cantidad,
+            DF.numeroFactura,
+            DF.codigoProducto
+         from DetalleFactura DF;   
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarDetalleFactura(in _codigoDetalleFactura int)
+    Begin
+		Select
+			DF.codigoDetalleFactura,
+			DF.precioUnitario,
+            DF.cantidad,
+            DF.numeroFactura,
+            DF.codigoProducto
+         from DetalleFactura DF 
+         where DF.codigoDetalleFactura = _codigoDetalleFactura;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EditarDetalleFactura(in _codigoDetalleFactura int, in _precioUnitario decimal(10,2), in _cantidad int,in _numeroFactura int ,in _codigoProducto varchar(15))
+    Begin
+		Update DetalleFactura DF
+        Set
+			DF.preciocUnitario = _precioUnitario,
+            DF.cantidad = _cantidad,
+            DF.numeroFactura = _numeroFactura,
+            DF.codigoProducto = _codigoProducto
+		where DF.codigoDetalleFactura = _codigoDetalleFactura;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EliminarDetalleFactura(in _codigoDetalleFactura int)
+    Begin
+		Delete from DetalleFactura
+        where codigoDetalleFactura = _codigoDetalleFactura;
+    End $$
+Delimiter ;
+-- ----------------------------------------------------------------------------------------------------------------------------------------------
 
 Delimiter $$
 	create function fn_CalcularPrecioUnitario(codigoProducto varchar(15)) returns decimal(10,2)
@@ -690,18 +876,46 @@ Delimiter $$
 	End $$
 Delimiter ;	
 
+Delimiter $$
+	create procedure sp_AgregarExistencia(codigoProducto varchar(15),cantidad int)
+    Begin
+		update Productos P
+        set
+			P.existencia = cantidad
+		where P.codigoProducto = codigoProducto;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	Create Trigger tr_DetalleCompraExistencia_After_Insert
+    After Insert on DetalleCompra
+    for each row
+    Begin
+		call sp_AgregarExistencia(NEW.codigoProducto,NEW.cantidad);
+    End $$
+Delimiter ;
+
+
+
+
+-- -------------------------------------- Agregar ------------------------------------------------------------------------
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
-call sp_AgregarTipoProducto(2,'Es un cerdo');
+call sp_AgregarTipoProducto(2,'Es un cerdota lola con mucha carne');
+call sp_AgregarCompras(2,'2024/01/01','Es una vaca con mucha carne',0);
 call sp_AgregarCargoEmpleado(1,'Jefatura','Ser lider de un equipo de trabajo');
-call sp_AgregarCompras(1,'2024/01/01','Es una vaquita lola con mucha carne',0);
-call sp_AgregarCompras(2,'2024/01/01','Es una vaca lechera',0);
+call sp_AgregarCompras(1,'2024/01/01','Es una vaquita',0);
 call sp_AgregarProducto('1','Es una vaca lola xD',0,0,0,'xD',1,1,1);
 call sp_AgregarProducto('2','Es una vaca',0,0,0,'xD',1,1,1);
-call sp_AgregarDetalleCompra(1,12.00,3,'1',1);
-call sp_AgregarDetalleCompra(2,10.00,1,'2',1);
+call sp_AgregarDetalleCompra(1,12.00,4,'1',1);
+call sp_AgregarDetalleCompra(2,10.00,1,'2',2);
+call sp_AgregarEmpleados(1,'Derian','Hernandez',2000,'Ciudad Quetzal','Vespertino',1);
+call sp_AgregarFactura(1,'Feliz',0,'2024/01/01',1,1);
+call sp_AgregarDetalleFactura(1,0,1,1,1);
 set global time_zone = '-6:00';
-
+-- --------------------------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------ lIstar ------------------------------------------------------
 call sp_ListarTipoProducto();
 call sp_ListarProductos();
 call sp_ListarCompras();
+call sp_ListarDetalleFactura();

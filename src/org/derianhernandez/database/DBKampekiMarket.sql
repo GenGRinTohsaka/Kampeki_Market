@@ -895,42 +895,9 @@ Delimiter $$
     End $$
 Delimiter ;
 
-Delimiter $$
-	create function fn_ObtenerPrecioUnitario(codigoProducto int) returns decimal(10,2)
-    reads sql data deterministic
-    Begin
-		Declare precioUnitario decimal(10,2);
-        Select (P.precioUnitario)
-        into precioUnitario 
-        from Productos P
-        where P.codigoProducto = codigoProducto;
-        
-        return precioUnitario;
-    End $$
-    
-Delimiter ;
 
-Delimiter $$
-	create procedure sp_AgregarPrecioUnitarioDetalleFactura(in codigoProducto int)
-    Begin
-		Declare _precioUnitario decimal(10,2);
-        set _precioUnitario = fn_ObtenerPrecioUnitario(codigoProducto);
-        
-        Update Detallefactura DF
-        set
-			DF.precioUnitario = _precioUnitario
-		where DF.codigoProducto = codigoProducto;
-    End $$
-Delimiter ;
 
-Delimiter $$
-	Create Trigger tr_DetalleFactura_After_Insert
-    After  insert on DetalleFactura
-    for each row
-    Begin
-		call sp_AgregarPrecioUnitarioDetalleFactura(NEW.codigoProducto);
-    End $$
-Delimiter ;
+
 -- -------------------------------------- Agregar ------------------------------------------------------------------------
 call sp_AgregarProveedores(1,'15900126','Santi','Hernandez','Villa Nueva','Ser chancho','31657408','patoslocos.com');
 call sp_AgregarTipoProducto(1,'Es una vaca lola');
