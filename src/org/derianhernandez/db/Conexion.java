@@ -17,7 +17,7 @@ public class Conexion {
     public Conexion(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBKampekiMarket?useSSL=false","root", "Samedirection14");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBKampekiMarket?useSSL=false","root","Samedirection14");
              
         }catch(ClassNotFoundException e){
             e.printStackTrace();

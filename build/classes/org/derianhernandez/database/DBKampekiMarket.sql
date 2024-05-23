@@ -164,6 +164,8 @@ Delimiter $$
 	End $$
 Delimiter ;
 
+
+
 call sp_ListarClientes();
 
 
@@ -172,6 +174,7 @@ Delimiter $$
 	create procedure sp_BuscarClientes(in  _codigoCliente int)
     Begin
 		select 
+        C.codigoCliente,
         C.nitCliente,
         C.nombreCliente,
         C.apellidoCliente,
@@ -441,6 +444,18 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
+	create procedure sp_BuscarCargoEmpleado(_codigoCargoEmpleado int)
+    Begin
+		select
+			CE.codigoCargoEmpleado,
+            CE.nombreCargo,
+            CE.descripcionCargo
+		from CargoEmpleado CE
+        where CE.codigoCargoEmpleado = _codigoCargoEmpleado;
+    End $$
+Delimiter ;
+
+Delimiter $$
 	create procedure sp_EditarCargoEmpleado(in _codigoCargoEmpleado int, in _nombreCargo varchar(45), in _descripcionCargo varchar(45))
     Begin
 		update CargoEmpleado CE
@@ -619,7 +634,7 @@ Delimiter ;
 
 -- ----------------------------------- BUSCAR -----------------------------------------
 Delimiter $$
-	create procedure sp_BuscarFactura(in numeroFactura int)
+	create procedure sp_BuscarFactura(in _numeroFactura int)
     Begin
 		Select
 		F.estado,
@@ -628,7 +643,7 @@ Delimiter $$
 		F.codigoCliente,
 		F.codigoEmpleado
 		From Factura F 
-        Where numeroFactura = numeroFactura;
+        Where numeroFactura = _numeroFactura;
 	End $$
 Delimiter ;
         
@@ -659,7 +674,7 @@ Delimiter ;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- ---------------------------------------------------- Empleados -------------------------------------------------------------------------------------------------
 Delimiter $$
-	create procedure sp_AgregarEmpleados(in codigoEmpleado int,in nombresEmpelado varchar(50), in apellidosEmpleado varchar(50), in sueldo decimal(10,2),  in direccion varchar(150), in turno varchar(15), in codigoCargoEmpleado int)
+	create procedure sp_AgregarEmpleados(in codigoEmpleado int,in nombresEmpleado varchar(50), in apellidosEmpleado varchar(50), in sueldo decimal(10,2),  in direccion varchar(150), in turno varchar(15), in codigoCargoEmpleado int)
     Begin
 		Insert into Empleados(codigoEmpleado,nombresEmpleado,apellidosEmpleado,sueldo,direccion,turno,codigoCargoEmpleado)
 			values(codigoEmpleado,nombresEmpleado,apellidosEmpleado,sueldo,direccion,turno,codigoCargoEmpleado);
@@ -698,7 +713,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_EditarEmpleados(in _codigoEmpleado int,in _nombresEmpelado varchar(50), in _apellidosEmpleado varchar(50), in _sueldo decimal(10,2),  in _direccion varchar(150), in _turno varchar(15), in _codigoCargoEmpleado int)
+	create procedure sp_EditarEmpleados(in _codigoEmpleado int,in _nombresEmpleado varchar(50), in _apellidosEmpleado varchar(50), in _sueldo decimal(10,2),  in _direccion varchar(150), in _turno varchar(15), in _codigoCargoEmpleado int)
     Begin
 		Update Empleados E
         Set
@@ -919,3 +934,4 @@ call sp_ListarTipoProducto();
 call sp_ListarProductos();
 call sp_ListarCompras();
 call sp_ListarDetalleFactura();
+call sp_ListarEmpleados();

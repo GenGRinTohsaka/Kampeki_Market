@@ -23,6 +23,8 @@ public class Empleados {
         this.codigoCargoEmpleado = codigoCargoEmpleado;
     }
 
+    
+
     public int getCodigoEmpleado() {
         return codigoEmpleado;
     }

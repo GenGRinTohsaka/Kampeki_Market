@@ -23,11 +23,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import org.derianhernandez.bean.CargoEmpleado;
 import org.derianhernandez.bean.Empleados;
-import org.derianhernandez.bean.Productos;
 import org.derianhernandez.db.Conexion;
 import org.derianhernandez.system.Main;
 
@@ -38,6 +36,11 @@ import org.derianhernandez.system.Main;
  */
 public class EmpleadosViewController implements Initializable {
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        cmbCCE.setItems(getCargoEmpleado());
+        cargarDatos();
+    }
     @FXML
     private Button btnAgregarE;
     @FXML
@@ -85,12 +88,6 @@ public class EmpleadosViewController implements Initializable {
     @FXML
     private TableColumn colCodigoCargoEmpleado;
     private Main escenarioPrincipal;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        cmbCCE.setItems(getCargoEmpleado());
-        cargarDatos();
-    }
 
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
@@ -187,9 +184,9 @@ public class EmpleadosViewController implements Initializable {
     }
 
     public void agregar() {
-        limpiarControles();
         switch (tipoDeOperaciones) {
             case NINGUNO:
+                limpiarControles();
                 activarControles();
                 btnAgregarE.setText("Guardar");
                 btnEliminarE.setText("Cancelar");

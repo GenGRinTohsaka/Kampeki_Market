@@ -1,17 +1,17 @@
 
 package org.derianhernandez.bean;
 
-public class DetalleCompra {
+public class DetalleFactura {
     private int codigoDetalleFactura;
     private double precioUnitario;
     private int cantidad;
     private int numeroFactura;
     private String codigoProducto;
 
-    public DetalleCompra() {
+    public DetalleFactura() {
     }
 
-    public DetalleCompra(int codigoDetalleFactura, double precioUnitario, int cantidad, int numeroFactura, String codigoProducto) {
+    public DetalleFactura(int codigoDetalleFactura, double precioUnitario, int cantidad, int numeroFactura, String codigoProducto) {
         this.codigoDetalleFactura = codigoDetalleFactura;
         this.precioUnitario = precioUnitario;
         this.cantidad = cantidad;

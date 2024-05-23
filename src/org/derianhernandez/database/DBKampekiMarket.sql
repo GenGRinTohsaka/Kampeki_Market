@@ -164,6 +164,8 @@ Delimiter $$
 	End $$
 Delimiter ;
 
+
+
 call sp_ListarClientes();
 
 
@@ -172,6 +174,7 @@ Delimiter $$
 	create procedure sp_BuscarClientes(in  _codigoCliente int)
     Begin
 		select 
+        C.codigoCliente,
         C.nitCliente,
         C.nombreCliente,
         C.apellidoCliente,
@@ -631,7 +634,7 @@ Delimiter ;
 
 -- ----------------------------------- BUSCAR -----------------------------------------
 Delimiter $$
-	create procedure sp_BuscarFactura(in numeroFactura int)
+	create procedure sp_BuscarFactura(in _numeroFactura int)
     Begin
 		Select
 		F.estado,
@@ -640,7 +643,7 @@ Delimiter $$
 		F.codigoCliente,
 		F.codigoEmpleado
 		From Factura F 
-        Where numeroFactura = numeroFactura;
+        Where numeroFactura = _numeroFactura;
 	End $$
 Delimiter ;
         

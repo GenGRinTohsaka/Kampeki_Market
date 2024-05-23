@@ -32,46 +32,46 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregarDetalleF" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnAgregarDetalleF" contentDisplay="CENTER" mnemonicParsing="false" onAction="#agregar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminarDetalleF" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminarDetalleF" mnemonicParsing="false" onAction="#eliminar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditarDetalleF" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEditarDetalleF" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reporte" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
+            <ImageView fx:id="imgAgregar" fitHeight="55.0" fitWidth="52.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
                <image>
                   <Image url="@../images/factura+.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <ImageView fx:id="imgEliminar" fitHeight="80.0" fitWidth="52.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/factura-.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <ImageView fx:id="imgEditar" fitHeight="63.0" fitWidth="59.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/facturaEdit.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <ImageView fx:id="imgReporte" fitHeight="89.0" fitWidth="56.0" onMouseClicked="#reporte" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/informe-seo.png" />
                </image>
@@ -143,7 +143,7 @@
             <ComboBox fx:id="cmbCodigoP" prefHeight="26.0" prefWidth="395.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="tblDF" layoutX="217.0" layoutY="377.0" prefHeight="150.0" prefWidth="717.0" stylesheets="@../resources/KampekiMarketCSS.css">
+      <TableView fx:id="tblDF" layoutX="217.0" layoutY="377.0" onMouseClicked="#seleccionarElemento" prefHeight="150.0" prefWidth="717.0" stylesheets="@../resources/KampekiMarketCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoDF" prefWidth="143.4" text="Codigo Detalle Factura" />
             <TableColumn fx:id="colPrecioU" prefWidth="143.4" text="Precio Unitario" />
