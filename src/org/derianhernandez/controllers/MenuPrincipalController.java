@@ -52,6 +52,8 @@ public class MenuPrincipalController implements Initializable {
     private MenuItem btnFacturas;
     @FXML
     private MenuItem btnDetalleFactura; 
+    @FXML
+    private MenuItem btnEmailProveedor;
 
     @FXML
     private void buttonHandleEvent(ActionEvent event) throws IOException {
@@ -78,6 +80,8 @@ public class MenuPrincipalController implements Initializable {
             escenarioPrincipal.facturaView();
         } else if (event.getSource() == btnDetalleFactura){
             escenarioPrincipal.detalleFacturaView();
+        } else if (event.getSource() == btnEmailProveedor){
+            escenarioPrincipal.emailProveedorView();
         }
 
     }
