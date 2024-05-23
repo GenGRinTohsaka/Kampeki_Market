@@ -128,4 +128,11 @@ public class Clientes {
         this.correoCliente = correoCliente;
 
     }
+    
+    @Override
+    public String toString() {
+        return getCodigoCliente() + " | " + getNitCliente() +" | "+ getNombreCliente()
+                + " | " + getApellidoCliente() + " | " + getDireccionCliente() + " | "
+                + getTelefonoCliente() + " | " + getCorreoCliente();
+    }
 }

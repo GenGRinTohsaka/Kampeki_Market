@@ -5,6 +5,7 @@
  */
 package org.derianhernandez.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -33,6 +35,8 @@ import org.derianhernandez.system.Main;
 
 public class DetalleFacturaViewController implements Initializable {
 
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnAgregarDetalleF;
     @FXML
@@ -383,6 +387,13 @@ public class DetalleFacturaViewController implements Initializable {
                 imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
                 tipoDeOperaciones = DetalleFacturaViewController.operaciones.NINGUNO;
                 break;
+        }
+    }
+    
+    @FXML
+    private void clicHome(ActionEvent event) throws IOException {
+        if (event.getSource() == btnHome) {
+            escenarioPrincipal.menuPrincipalView();
         }
     }
 }

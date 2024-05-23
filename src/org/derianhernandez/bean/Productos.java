@@ -99,5 +99,12 @@ public class Productos {
         this.codigoProveedor = codigoProveedor;
     }
     
-    
+    @Override
+    public String toString() {
+        return getCodigoProducto() + " | " + getDescripcionProducto()+ " | "
+                + getPrecioUnitario() + " | " + getPrecioDocena()+ " | " +
+                getPrecioMayor()+ " | "+ getImagenProducto()+ " | " +
+                getExistencia() + " | " + getCodigoTipoProducto() + " | "
+                + getCodigoProveedor();
+    }
 }

@@ -5,6 +5,7 @@
  */
 package org.derianhernandez.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,6 +38,8 @@ import org.derianhernandez.system.Main;
  */
 public class EmailProveedorViewController implements Initializable {
 
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnAgregarEP;
     @FXML
@@ -330,5 +333,10 @@ public class EmailProveedorViewController implements Initializable {
                 break;
         }
     }
-
+@FXML
+    private void clicHome(ActionEvent event) throws IOException {
+        if (event.getSource() == btnHome) {
+            escenarioPrincipal.menuPrincipalView();
+        }
+    }
 }

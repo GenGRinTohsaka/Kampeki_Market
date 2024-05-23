@@ -5,6 +5,7 @@
  */
 package org.derianhernandez.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +42,8 @@ public class EmpleadosViewController implements Initializable {
         cmbCCE.setItems(getCargoEmpleado());
         cargarDatos();
     }
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnAgregarE;
     @FXML
@@ -357,5 +360,12 @@ public class EmpleadosViewController implements Initializable {
         txtSueldo.clear();
         cmbCCE.getSelectionModel().getSelectedItem();
 
+    }
+
+    @FXML
+    private void clicHome(ActionEvent event) throws IOException {
+        if (event.getSource() == btnHome) {
+            escenarioPrincipal.menuPrincipalView();
+        }
     }
 }

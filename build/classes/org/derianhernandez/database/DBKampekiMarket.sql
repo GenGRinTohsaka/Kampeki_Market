@@ -313,7 +313,7 @@ Delimiter $$
     Begin
 		Insert Into EmailProveedor(codigoEmailProveedor,emailProveedor,descripcion,codigoProveedor)
         values (codigoEmailProveedor,emailProveedor,descripcion,codigoProveedor);
-    End ;
+    End $$
 Delimiter ;
 
 Delimiter $$
@@ -337,15 +337,15 @@ Delimiter $$
             EP.descripcion = _descripcion,
             EP.codigoProveedor = _codigoProveedor
 		where EP.codigoEmailProveedor = _codigoEmailProveedor;
-    End ;
+    End $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_EliminarEmailProveedor(in _codigoEmailProveedor)
+	create procedure sp_EliminarEmailProveedor(in _codigoEmailProveedor int)
     Begin
 		Delete from EmailProveedor 
         where codigoEmailProveedor = _codigoEmailProveedor;
-    End ;
+    End $$
 Delimiter ;
 
 Delimiter $$
@@ -502,6 +502,24 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
+	create procedure sp_BuscarProductos(in _codigoProducto varchar(15))
+    Begin
+		select
+			P.codigoProducto,
+            P.descripcionProducto,
+            P.precioUnitario,
+            P.precioDocena,
+            P.precioMayor,
+            P.imagenProducto,
+            P.existencia,
+            P.codigoTipoProducto,
+            P.codigoProveedor
+		from Productos P
+        where P.codigoProducto = _codigoProducto;
+    End $$
+Delimiter ;
+
+Delimiter $$
 
 	create procedure sp_buscarTipoProducto (in _codigoTipoProducto int)
 		Begin
@@ -637,13 +655,14 @@ Delimiter $$
 	create procedure sp_BuscarFactura(in _numeroFactura int)
     Begin
 		Select
+        F.numeroFactura,
 		F.estado,
 		F.totalFactura,
 		F.fechaFactura,
 		F.codigoCliente,
 		F.codigoEmpleado
 		From Factura F 
-        Where numeroFactura = _numeroFactura;
+        Where F.numeroFactura = _numeroFactura;
 	End $$
 Delimiter ;
         
@@ -776,7 +795,7 @@ Delimiter $$
     Begin
 		Update DetalleFactura DF
         Set
-			DF.preciocUnitario = _precioUnitario,
+			DF.precioUnitario = _precioUnitario,
             DF.cantidad = _cantidad,
             DF.numeroFactura = _numeroFactura,
             DF.codigoProducto = _codigoProducto

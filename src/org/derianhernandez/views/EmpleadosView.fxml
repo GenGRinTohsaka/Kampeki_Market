@@ -184,5 +184,18 @@
             <String fx:value="table-view" />
          </styleClass>
       </TableView>
+      <Button fx:id="btnHome" layoutX="24.0" layoutY="434.0" mnemonicParsing="false" onAction="#clicHome" prefHeight="53.0" prefWidth="78.0" stylesheets="@../resources/KampekiMarketCSS.css">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button2" />
+            <String fx:value="button3" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

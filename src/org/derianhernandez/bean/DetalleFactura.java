@@ -59,5 +59,9 @@ public class DetalleFactura {
         this.codigoProducto = codigoProducto;
     }
     
-    
+    @Override
+    public String toString() {
+        return getCodigoDetalleFactura() + " | " + getPrecioUnitario() + " | " + 
+                getCantidad() + " | " + getNumeroFactura() + " | " + getCodigoProducto();
+    }
 }

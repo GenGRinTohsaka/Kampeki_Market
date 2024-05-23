@@ -49,5 +49,9 @@ public class EmailProveedor {
         this.codigoProveedor = codigoProveedores;
     }
     
-    
+    @Override
+    public String toString() {
+        return getCodigoEmailProveedor() + " | " + getEmailProveedor()+ " | "+
+                getDescripcion() + " | " + getCodigoProveedor() ;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package org.derianhernandez.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -37,9 +39,11 @@ import org.derianhernandez.system.Main;
  */
 public class FacturasViewController implements Initializable {
 
-       private ObservableList<Empleados> listaEmpleados;
+    private ObservableList<Empleados> listaEmpleados;
     private ObservableList<Facturas> listaFacturas;
     private ObservableList<Clientes> listaClientes;
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnAgregarFactura;
     @FXML
@@ -106,8 +110,6 @@ public class FacturasViewController implements Initializable {
         AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO
     }
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
-
- 
 
     public ObservableList<Facturas> getFacturas() {
         ArrayList<Facturas> lista = new ArrayList();
@@ -237,7 +239,7 @@ public class FacturasViewController implements Initializable {
     }
 
     public void guardar() {
-        
+
         Facturas registro = new Facturas();
         registro.setNumeroFactura(Integer.parseInt(txtNumeroF.getText()));
         registro.setEstado(txtEstadoF.getText());
@@ -284,7 +286,7 @@ public class FacturasViewController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     public void desactivarControles() {
         txtNumeroF.setEditable(false);
         txtEstadoF.setEditable(false);
@@ -312,9 +314,9 @@ public class FacturasViewController implements Initializable {
         cmbCodigoE.getSelectionModel().getSelectedItem();
 
     }
-    
+
     public void agregar() {
-  
+
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 limpiarControles();
@@ -341,7 +343,7 @@ public class FacturasViewController implements Initializable {
                 break;
         }
     }
-    
+
     public void eliminar() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -357,7 +359,7 @@ public class FacturasViewController implements Initializable {
                 break;
         }
     }
-    
+
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -390,7 +392,7 @@ public class FacturasViewController implements Initializable {
                 break;
         }
     }
-    
+
     public void reporte() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -404,6 +406,13 @@ public class FacturasViewController implements Initializable {
                 imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
                 tipoDeOperaciones = FacturasViewController.operaciones.NINGUNO;
                 break;
+        }
+    }
+
+    @FXML
+    private void clicHome(ActionEvent event) throws IOException {
+        if (event.getSource() == btnHome) {
+            escenarioPrincipal.menuPrincipalView();
         }
     }
 }

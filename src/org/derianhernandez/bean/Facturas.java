@@ -69,5 +69,10 @@ public class Facturas {
         this.codigoEmpleado = codigoEmpleado;
     }
    
-   
+   @Override
+    public String toString() {
+        return getNumeroFactura() + " | " + getEstado()+ " | " + getTotalFactura()+
+                " | " + getFechaFactura() + " | " + getCodigoCliente() + " | "
+                + getCodigoEmpleado();
+    }
 }

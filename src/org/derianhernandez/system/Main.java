@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.derianhernandez.controllers.CargoEmpleadoController;
+import org.derianhernandez.controllers.DetalleCompraViewController;
 import org.derianhernandez.controllers.DetalleFacturaViewController;
 import org.derianhernandez.controllers.EmailProveedorViewController;
 import org.derianhernandez.controllers.EmpleadosViewController;
@@ -223,6 +224,16 @@ public class Main extends Application {
             EmailProveedorViewController emailProveedorView = (EmailProveedorViewController) cambiarEscena("EmailProveedorView.fxml",1075,600);
             emailProveedorView.setEscenarioPrincipal(this);
             this.escenarioPrincipal.setTitle("Email Proveedor");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void detalleCompraView(){
+        try{
+            DetalleCompraViewController detalleCompraView = (DetalleCompraViewController) cambiarEscena("DetalleCompraView.fxml",1013,565);
+            detalleCompraView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Detalle Compra");
         }catch(Exception e){
             e.printStackTrace();
         }
