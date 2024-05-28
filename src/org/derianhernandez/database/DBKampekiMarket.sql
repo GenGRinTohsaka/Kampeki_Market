@@ -404,6 +404,7 @@ Delimiter $$
     End $$
 Delimiter ;
 
+
 Delimiter $$
 	create procedure sp_EditarCompras(in _numeroDocumento int, in _fechaDocumento date,in _descripcion varchar(60), in _totalDocumento decimal(10,2))
     Begin
@@ -413,6 +414,19 @@ Delimiter $$
             C.descripcion = _descripcion,
             C.totalDocumento = _totalDocumento
 		where C.numeroDocumento = _numeroDocumento;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarCompras(in _numeroDocumento int)
+    Begin
+		select 
+			C.numeroDocumento,
+            C.fechaDocumento,
+            C.descripcion,
+            C.totalDocumento
+		from Compras C
+        where C.numeroDocumento = _numeroDocumento;
     End $$
 Delimiter ;
 

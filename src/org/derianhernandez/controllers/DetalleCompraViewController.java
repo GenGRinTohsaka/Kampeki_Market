@@ -57,7 +57,7 @@ public class DetalleCompraViewController implements Initializable {
     @FXML
     private ImageView imgEditar;
     @FXML
-    private Button btnReporte;
+    private Button btnReportes;
     @FXML
     private ImageView imgReporte;
     @FXML
@@ -81,7 +81,7 @@ public class DetalleCompraViewController implements Initializable {
     @FXML
     private ComboBox cmbND;
     @FXML
-    private TableView tblc;
+    private TableView tblC;
     private ObservableList<Productos> listaProductos;
     private ObservableList<Compras> listaCompras;
     private ObservableList<DetalleCompra> listaDetalleCompra;
@@ -95,7 +95,7 @@ public class DetalleCompraViewController implements Initializable {
     }
 
     public void cargarDatos() {
-        tblc.setItems(getDetalleCompra());
+        tblC.setItems(getDetalleCompra());
         colCDC.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("codigoDetalleCompra"));
         colCU.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Double>("costoUnitario"));
         colC.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("cantidad"));
@@ -105,11 +105,11 @@ public class DetalleCompraViewController implements Initializable {
     }
 
     public void seleccionarElementos() {
-        txtCDC.setText(String.valueOf(((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getCodigoDetalleCompra()));
-        txtCU.setText(String.valueOf(((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getCostoUnitario()));
-        txtC.setText(String.valueOf(((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getCantidad()));
-        cmbCP.getSelectionModel().select(buscarProducto(((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getCodigoProducto()));
-        cmbND.getSelectionModel().select(buscarCompra(((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
+        txtCDC.setText(String.valueOf(((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getCodigoDetalleCompra()));
+        txtCU.setText(String.valueOf(((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getCostoUnitario()));
+        txtC.setText(String.valueOf(((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getCantidad()));
+        cmbCP.getSelectionModel().select(buscarProducto(((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getCodigoProducto()));
+        cmbND.getSelectionModel().select(buscarCompra(((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
     }
 
     public Productos buscarProducto(String codigoProducto) {
@@ -226,7 +226,7 @@ public class DetalleCompraViewController implements Initializable {
                 imgAgregar.setImage(new Image("/org/derianhernandez/images/Guardar.png"));
                 imgEliminar.setImage(new Image("/org/derianhernandez/images/Eliminar2.png"));
                 btnEditarDC.setDisable(true);
-                btnReporte.setDisable(true);
+                btnReportes.setDisable(true);
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -236,9 +236,9 @@ public class DetalleCompraViewController implements Initializable {
                 btnAgregarDC.setText("Agregar");
                 btnEliminarDC.setText("Eliminar");
                 imgAgregar.setImage(new Image("org/derianhernandez/images/buy+.png"));
-                imgEliminar.setImage(new Image("org/derianhernandez/images/buy-.png"));
+                imgEliminar.setImage(new Image("org/derianhernandez/images/buy-t.png"));
                 btnEditarDC.setDisable(false);
-                btnReporte.setDisable(false);
+                btnReportes.setDisable(false);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -254,21 +254,21 @@ public class DetalleCompraViewController implements Initializable {
                 btnAgregarDC.setText("Agregar");
                 btnEliminarDC.setText("Eliminar");
                 btnEditarDC.setDisable(false);
-                btnReporte.setDisable(false);
+                btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/derianhernandez/images/buy+.png"));
-                imgEliminar.setImage(new Image("/org/derianhernandez/images/buy-.png"));
+                imgEliminar.setImage(new Image("/org/derianhernandez/images/buy-t.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
-                if (tblc.getSelectionModel().getSelectedItem() != null) {
+                if (tblC.getSelectionModel().getSelectedItem() != null) {
                     int respuesta = JOptionPane.showConfirmDialog(null, "Confirmar si elimina registro",
                             "Eliminar Detalle Compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
                         try {
                             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EliminarDetalleCompra(?)}");
-                            procedimiento.setInt(1, ((DetalleCompra) tblc.getSelectionModel().getSelectedItem()).getCodigoDetalleCompra());
+                            procedimiento.setInt(1, ((DetalleCompra) tblC.getSelectionModel().getSelectedItem()).getCodigoDetalleCompra());
                             procedimiento.execute();
-                            listaDetalleCompra.remove(tblc.getSelectionModel().getSelectedItem());
+                            listaDetalleCompra.remove(tblC.getSelectionModel().getSelectedItem());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -282,9 +282,9 @@ public class DetalleCompraViewController implements Initializable {
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
-                if (tblc.getSelectionModel().getSelectedItem() != null) {
+                if (tblC.getSelectionModel().getSelectedItem() != null) {
                     btnEditarDC.setText("Actualizar");
-                    btnReporte.setText("Cancelar");
+                    btnReportes.setText("Cancelar");
                     btnAgregarDC.setDisable(true);
                     btnEliminarDC.setDisable(true);
                     imgReporte.setImage(new Image("/org/derianhernandez/images/Eliminar2.png"));
@@ -300,7 +300,7 @@ public class DetalleCompraViewController implements Initializable {
                 desactivarControllers();
                 limpiarControllers();
                 btnEditarDC.setText("Editar");
-                btnReporte.setText("Reportes");
+                btnReportes.setText("Reportes");
                 btnAgregarDC.setDisable(false);
                 btnEliminarDC.setDisable(false);
                 imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
@@ -316,7 +316,7 @@ public class DetalleCompraViewController implements Initializable {
                 desactivarControllers();
                 limpiarControllers();
                 btnEditarDC.setText("Editar");
-                btnReporte.setText("Reporte");
+                btnReportes.setText("Reporte");
                 btnAgregarDC.setDisable(false);
                 btnEliminarDC.setDisable(false);
                 imgEditar.setImage(new Image("/org/derianhernandez/images/buyEdit.png"));
@@ -334,7 +334,7 @@ public class DetalleCompraViewController implements Initializable {
         registro.setCodigoProducto(((Productos) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProducto());
         registro.setNumeroDocumento(((Compras) cmbND.getSelectionModel().getSelectedItem()).getNumeroDocumento());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarDetalleCompras(?, ?, ?, ?, ?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarDetalleCompra(?, ?, ?, ?, ?)}");
             procedimiento.setInt(1, registro.getCodigoDetalleCompra());
             procedimiento.setDouble(2, registro.getCostoUnitario());
             procedimiento.setInt(3, registro.getCantidad());
@@ -350,7 +350,7 @@ public class DetalleCompraViewController implements Initializable {
     public void actualizar() {
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarDetalleCompra(?,?,?,?,?)}");
-            DetalleCompra registro = (DetalleCompra) tblc.getSelectionModel().getSelectedItem();
+            DetalleCompra registro = (DetalleCompra) tblC.getSelectionModel().getSelectedItem();
             registro.setCodigoDetalleCompra(Integer.parseInt(txtCDC.getText()));
             registro.setCostoUnitario(Double.parseDouble(txtCU.getText()));
             registro.setCantidad(Integer.parseInt(txtC.getText()));
@@ -387,7 +387,7 @@ public class DetalleCompraViewController implements Initializable {
         txtCDC.clear();
         txtCU.clear();
         txtC.clear();
-        tblc.getSelectionModel().getSelectedItem();
+        tblC.getSelectionModel().getSelectedItem();
         cmbCP.getSelectionModel().getSelectedItem();
         cmbND.getSelectionModel().getSelectedItem();
 

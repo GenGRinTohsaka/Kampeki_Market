@@ -229,6 +229,8 @@ public class EmpleadosViewController implements Initializable {
                 break;
         }
     }
+        
+   
 
     public void editar() {
         switch (tipoDeOperaciones) {
