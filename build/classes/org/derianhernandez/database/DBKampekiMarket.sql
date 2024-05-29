@@ -404,6 +404,7 @@ Delimiter $$
     End $$
 Delimiter ;
 
+
 Delimiter $$
 	create procedure sp_EditarCompras(in _numeroDocumento int, in _fechaDocumento date,in _descripcion varchar(60), in _totalDocumento decimal(10,2))
     Begin
@@ -413,6 +414,19 @@ Delimiter $$
             C.descripcion = _descripcion,
             C.totalDocumento = _totalDocumento
 		where C.numeroDocumento = _numeroDocumento;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarCompras(in _numeroDocumento int)
+    Begin
+		select 
+			C.numeroDocumento,
+            C.fechaDocumento,
+            C.descripcion,
+            C.totalDocumento
+		from Compras C
+        where C.numeroDocumento = _numeroDocumento;
     End $$
 Delimiter ;
 
@@ -605,7 +619,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_EditarDetalleCompra(in _codigoDetalleCompra int, in _costoUnitario decimal(10,2), in _cantidad int, in _codigoProducto varchar(15), in numeroDocumento int)
+	create procedure sp_EditarDetalleCompra(in _codigoDetalleCompra int, in _costoUnitario decimal(10,2), in _cantidad int, in _codigoProducto varchar(15), in _numeroDocumento int)
 		Begin
 			Update DetalleCompra DC
 				set
@@ -868,6 +882,15 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
+	Create Trigger tr_DetalleCompra_After_Update
+    After Update on DetalleCompra
+    for each row
+    Begin
+        call sp_AsignarPrecios(NEW.codigoProducto);
+    End $$
+Delimiter ;
+
+Delimiter $$
 	Create Trigger tr_DetalleCompra_After_Insert
     After Insert on DetalleCompra
     for each row
@@ -929,6 +952,18 @@ Delimiter $$
     End $$
 Delimiter ;
 
+Delimiter $$
+	Create Trigger tr_DetalleCompraExistencia_After_Update
+    After Update on DetalleCompra
+    for each row
+    Begin
+		call sp_AgregarExistencia(NEW.codigoProducto,NEW.cantidad);
+    End $$
+Delimiter ;
+
+Delimiter $$
+	Create function fn
+Delimiter ;
 
 
 

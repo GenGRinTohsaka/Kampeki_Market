@@ -391,10 +391,6 @@ public class ProductosViewController implements Initializable {
     public void activarControles() {
         txtCodigoCP.setEditable(true);
         txtDescripcionP.setEditable(true);
-        txtPrecioU.setEditable(true);
-        txtPrecioD.setEditable(true);
-        txtPrecioM.setEditable(true);
-        txtExistencia.setEditable(true);
         cmbCTP.setDisable(false);
         cmbCP.setDisable(false);
         txtImagen.setEditable(true);
@@ -418,11 +414,11 @@ public class ProductosViewController implements Initializable {
         Productos registro = new Productos();
         registro.setCodigoProducto(txtCodigoCP.getText());
         registro.setDescripcionProducto(txtDescripcionP.getText());
-        registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
-        registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
-        registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
+        registro.setPrecioDocena(0);
+        registro.setPrecioUnitario(0);
+        registro.setPrecioMayor(0);
         registro.setImagenProducto(txtImagen.getText());
-        registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+        registro.setExistencia(0);
         registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
 

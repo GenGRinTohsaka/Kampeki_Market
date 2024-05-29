@@ -27,6 +27,7 @@ import org.derianhernandez.controllers.MenuProveedoresController;
 import org.derianhernandez.controllers.MenuTipoProductoController;
 import org.derianhernandez.controllers.ProductosViewController;
 import org.derianhernandez.controllers.ProgramadorController;
+import org.derianhernandez.controllers.TelefonoProveedorViewController;
 
 /**
  * Autor: Derian Hernandez
@@ -234,6 +235,16 @@ public class Main extends Application {
             DetalleCompraViewController detalleCompraView = (DetalleCompraViewController) cambiarEscena("DetalleCompraView.fxml",1013,565);
             detalleCompraView.setEscenarioPrincipal(this);
             this.escenarioPrincipal.setTitle("Detalle Compra");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void telefonoProveedor(){
+        try{
+            TelefonoProveedorViewController telefonoProveedorView = (TelefonoProveedorViewController) cambiarEscena("TelefonoProveedorView.fxml",1062,593);
+            telefonoProveedorView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Telefono Proveedor");
         }catch(Exception e){
             e.printStackTrace();
         }

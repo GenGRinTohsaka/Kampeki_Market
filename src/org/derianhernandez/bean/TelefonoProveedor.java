@@ -6,7 +6,7 @@ public class TelefonoProveedor {
     private String numeroPrincipal;
     private String numeroSecundario;
     private String observaciones;
-    private int codigoProveedores;
+    private int codigoProveedor;
 
     public TelefonoProveedor() {
     }
@@ -16,7 +16,7 @@ public class TelefonoProveedor {
         this.numeroPrincipal = numeroPrincipal;
         this.numeroSecundario = numeroSecundario;
         this.observaciones = observaciones;
-        this.codigoProveedores = codigoProveedores;
+        this.codigoProveedor = codigoProveedores;
     }
 
     public int getCodigoTelefonoProveedor() {
@@ -51,18 +51,18 @@ public class TelefonoProveedor {
         this.observaciones = observaciones;
     }
 
-    public int getCodigoProveedores() {
-        return codigoProveedores;
+    public int getCodigoProveedor() {
+        return codigoProveedor;
     }
 
-    public void setCodigoProveedores(int codigoProveedores) {
-        this.codigoProveedores = codigoProveedores;
+    public void setCodigoProveedor(int codigoProveedores) {
+        this.codigoProveedor = codigoProveedores;
     }
     
     @Override
     public String toString() {
         return getCodigoTelefonoProveedor() + " | " + getNumeroPrincipal() + " | "
                 + getNumeroSecundario() + " | " + getObservaciones()+ " | "+
-                getCodigoProveedores();
+                getCodigoProveedor();
     }
 }
