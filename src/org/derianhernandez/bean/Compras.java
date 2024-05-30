@@ -1,10 +1,12 @@
 
 package org.derianhernandez.bean;
 
+import java.sql.Date;
+
 public class Compras {
    
     private int numeroDocumento;
-    private String fechaDocumento;
+    private Date fechaDocumento;
     private String descripcion;
     private double totalDocumento;
 
@@ -12,7 +14,7 @@ public class Compras {
     }
 
     
-    public Compras(int numeroDocumento, String fechaDocumento, String descripcion, double totalDocumento) {
+    public Compras(int numeroDocumento, Date fechaDocumento, String descripcion, double totalDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.fechaDocumento = fechaDocumento;
         this.descripcion = descripcion;
@@ -27,11 +29,11 @@ public class Compras {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getFechaDocumento() {
+    public Date getFechaDocumento() {
         return fechaDocumento;
     }
 
-    public void setFechaDocumento(String fechaDocumento) {
+    public void setFechaDocumento(Date fechaDocumento) {
         this.fechaDocumento = fechaDocumento;
     }
 

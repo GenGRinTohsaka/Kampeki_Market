@@ -269,8 +269,8 @@ Delimiter ;
 Delimiter $$
 	create procedure sp_AgregarTelefonoProveedor(in codigoTelefonoProveedor int,in numeroPrincipal varchar(8), in numeroSecundario varchar(8), in observaciones varchar(45), in codigoProveedor int)
     Begin
-		Insert Into TelefonoProveedor(codigoTeleonoProveedor,numeroPrincipal,numeroSecundario,observaciones,codigoProveedor)
-        values (codigoTeleonoProveedor,numeroPrincipal,numeroSecundario,observaciones,codigoProveedor);
+		Insert Into TelefonoProveedor(codigoTelefonoProveedor,numeroPrincipal,numeroSecundario,observaciones,codigoProveedor)
+        values (codigoTelefonoProveedor,numeroPrincipal,numeroSecundario,observaciones,codigoProveedor);
     End $$
 Delimiter ;
 
@@ -284,6 +284,20 @@ Delimiter $$
             TP.observaciones,
             TP.codigoProveedor
 		from TelefonoProveedor TP;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarTelefonoProveedor(in _codigoTelefonoProveedor int)
+    Begin
+		Select
+			TP.codigoTelefonoProveedor,
+            TP.numeroPrincipal,
+            TP.numeroSecundario,
+            TP.observaciones,
+            TP.codigoProveedor
+		from TelefonoProveedor TP
+        where TP.codigoTelefonoProveedor = _codigoTelefonoProveedor;
     End $$
 Delimiter ;
 
@@ -961,9 +975,7 @@ Delimiter $$
     End $$
 Delimiter ;
 
-Delimiter $$
-	Create function fn
-Delimiter ;
+
 
 
 
@@ -989,3 +1001,4 @@ call sp_ListarProductos();
 call sp_ListarCompras();
 call sp_ListarDetalleFactura();
 call sp_ListarEmpleados();
+call sp_ListarTelefonoProveedor();
