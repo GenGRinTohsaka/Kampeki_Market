@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -155,16 +156,21 @@ public class MenuClientesController implements Initializable {
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
-                guardar();
-                desactivarControles();
-                limpiarControles();
-                btnAgregarClientes.setText("Agregar");
-                btnEliminarClientes.setText("Eliminar");
-                btnEditarClientes.setDisable(false);
-                btnReportes.setDisable(false);
-                imgAgregar.setImage(new Image("/org/derianhernandez/images/agregar-usuario.png"));
-                imgEliminar.setImage(new Image("/org/derianhernandez/images/quitar-usuario.png"));
-                tipoDeOperaciones = operaciones.NINGUNO;
+                if (txtCorreoC.getText().contains("@")) {
+                    guardar();
+                    desactivarControles();
+                    limpiarControles();
+                    btnAgregarClientes.setText("Agregar");
+                    btnEliminarClientes.setText("Eliminar");
+                    btnEditarClientes.setDisable(false);
+                    btnReportes.setDisable(false);
+                    imgAgregar.setImage(new Image("/org/derianhernandez/images/agregar-usuario.png"));
+                    imgEliminar.setImage(new Image("/org/derianhernandez/images/quitar-usuario.png"));
+                    tipoDeOperaciones = operaciones.NINGUNO;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Formato de correo incorrecto, no contiene @");
+                }
+
                 break;
         }
     }
@@ -226,17 +232,22 @@ public class MenuClientesController implements Initializable {
                 }
                 break;
             case ACTUALIZAR:
-                actualizar();
-                desactivarControles();
-                limpiarControles();
-                btnEditarClientes.setText("Editar");
-                btnReportes.setText("Reportes");
-                btnAgregarClientes.setDisable(false);
-                btnEliminarClientes.setDisable(false);
-                imgEditar.setImage(new Image("/org/derianhernandez/images/editar-perfil.png"));
-                imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
-                tipoDeOperaciones = operaciones.NINGUNO;
-                cargarDatos();
+                if (txtCorreoC.getText().contains("@")) {
+                    actualizar();
+                    desactivarControles();
+                    limpiarControles();
+                    btnEditarClientes.setText("Editar");
+                    btnReportes.setText("Reportes");
+                    btnAgregarClientes.setDisable(false);
+                    btnEliminarClientes.setDisable(false);
+                    imgEditar.setImage(new Image("/org/derianhernandez/images/editar-perfil.png"));
+                    imgReporte.setImage(new Image("/org/derianhernandez/images/informe-seo.png"));
+                    tipoDeOperaciones = operaciones.NINGUNO;
+                    cargarDatos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Formato de correo incorrecto, no contiene @");
+                }
+
                 break;
         }
     }
@@ -266,6 +277,7 @@ public class MenuClientesController implements Initializable {
     }
 
     public void guardar() {
+
         Clientes registro = new Clientes();
         registro.setCodigoCliente(Integer.parseInt(txtCodigoC.getText()));
         registro.setNombreCliente(txtNombreC.getText());
@@ -347,8 +359,6 @@ public class MenuClientesController implements Initializable {
         if (event.getSource() == btnRegresar) {
             escenarioPrincipal.menuPrincipalView();
 
-        } else if (event.getSource() == btnAgregarClientes) {
-            agregar();
         }
     }
 

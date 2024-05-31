@@ -58,7 +58,7 @@ create table Productos(
     precioUnitario decimal(10,2),
     precioDocena decimal(10,2),
     precioMayor decimal(10,2),
-    imagenProducto varchar(45),
+    imagenProducto varchar(70),
     existencia int,
 	codigoTipoProducto int,
     codigoProveedor int,
@@ -504,7 +504,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_AgregarProducto(in codigoProducto varchar(15), in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(45),
+	create procedure sp_AgregarProducto(in codigoProducto varchar(15), in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(70),
     in existencia int, in codigoTipoProducto int, in codigoProveedor int)
     Begin
 		Insert Into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
@@ -561,7 +561,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure  sp_editarProducto(in _codigoProducto varchar(15), in _descripcionProducto varchar(45), in _precioUnitario decimal(10,2), in _precioDocena decimal(10,2), in _precioMayor decimal(10,2), in _imagenProducto varchar(45),
+	create procedure  sp_editarProducto(in _codigoProducto varchar(15), in _descripcionProducto varchar(45), in _precioUnitario decimal(10,2), in _precioDocena decimal(10,2), in _precioMayor decimal(10,2), in _imagenProducto varchar(70),
     in _existencia int, in _codigoTipoProducto int, in _codigoProveedor int)
     Begin
 		Update productos P

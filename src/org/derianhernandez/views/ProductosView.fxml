@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.derianhernandez.controllers.ProductosViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1171.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.derianhernandez.controllers.ProductosViewController">
    <children>
-      <ImageView fitHeight="647.0" fitWidth="1075.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="658.0" fitWidth="1181.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Productos.png" />
          </image>
@@ -78,7 +78,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <TableView fx:id="tblP" layoutX="186.0" layoutY="389.0" onMouseClicked="#seleccionarElemento" prefHeight="194.0" prefWidth="841.0" stylesheets="@../resources/KampekiMarketCSS.css">
+      <TableView fx:id="tblP" layoutX="186.0" layoutY="438.0" onMouseClicked="#seleccionarElemento" prefHeight="194.0" prefWidth="841.0" stylesheets="@../resources/KampekiMarketCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoP" minWidth="93.44" prefWidth="75.0" text="Codigo Producto" />
             <TableColumn fx:id="colDescripcionP" minWidth="93.44" prefWidth="75.0" text="Descripcion Producto" />
@@ -108,10 +108,10 @@
             <TextField fx:id="txtCodigoCP" prefHeight="25.0" prefWidth="101.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="731.0" layoutY="99.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="258.0" layoutY="142.0" prefHeight="59.0" prefWidth="130.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.60003662109375" minWidth="10.0" prefWidth="50.4" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.39996337890625" minWidth="10.0" prefWidth="42.6" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -121,7 +121,7 @@
             <TextField fx:id="txtPrecioU" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="264.0" layoutY="158.0" prefHeight="59.0" prefWidth="349.0">
+      <GridPane layoutX="493.0" layoutY="93.0" prefHeight="59.0" prefWidth="349.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0" minWidth="10.0" prefWidth="134.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="369.0" minWidth="10.0" prefWidth="215.0" />
@@ -134,23 +134,23 @@
             <TextField fx:id="txtDescripcionP" prefHeight="25.0" prefWidth="145.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane fx:id="txtCodigoP" layoutX="452.0" layoutY="99.0" prefHeight="59.0" prefWidth="293.0">
+      <GridPane fx:id="txtCodigoP" layoutX="585.0" layoutY="142.0" prefHeight="59.0" prefWidth="158.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.4000244140625" minWidth="10.0" prefWidth="92.80003662109375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.20001220703125" minWidth="10.0" prefWidth="65.59996337890622" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Precio Mayor" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtPrecioM" GridPane.columnIndex="1" />
+            <TextField fx:id="txtPrecioM" prefHeight="26.0" prefWidth="186.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="629.0" layoutY="158.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="405.0" layoutY="142.0" prefHeight="59.0" prefWidth="158.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.4000244140625" minWidth="10.0" prefWidth="83.6" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.20001220703125" minWidth="10.0" prefWidth="74.79999999999998" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -160,9 +160,8 @@
             <TextField fx:id="txtPrecioD" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="242.0" layoutY="214.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="263.0" layoutY="195.0" prefHeight="138.0" prefWidth="118.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
@@ -170,13 +169,12 @@
          </rowConstraints>
          <children>
             <Label text="Imagen Producto" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtImagen" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="529.0" layoutY="214.0" prefHeight="59.0" prefWidth="278.0">
+      <GridPane layoutX="765.0" layoutY="142.0" prefHeight="59.0" prefWidth="114.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.20001220703125" minWidth="10.0" prefWidth="59.9999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="54.600024414062496" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -186,7 +184,7 @@
             <TextField fx:id="txtExistencia" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="264.0" layoutY="251.0" prefHeight="82.0" prefWidth="598.0">
+      <GridPane layoutX="258.0" layoutY="317.0" prefHeight="82.0" prefWidth="598.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="384.0" minWidth="0.0" prefWidth="131.60003662109375" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.39996337890625" minWidth="0.0" prefWidth="466.39996337890625" />
@@ -199,7 +197,7 @@
             <ComboBox fx:id="cmbCTP" prefHeight="22.0" prefWidth="452.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="255.0" layoutY="302.0" prefHeight="110.0" prefWidth="686.0">
+      <GridPane layoutX="263.0" layoutY="377.0" prefHeight="78.0" prefWidth="686.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.8" minWidth="0.0" prefWidth="104.5999755859375" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="615.2" minWidth="0.0" prefWidth="581.6000244140625" />
@@ -212,7 +210,7 @@
             <ComboBox fx:id="cmbCP" prefHeight="26.0" prefWidth="610.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnHome" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#clicHome" prefHeight="53.0" prefWidth="78.0" stylesheets="@../resources/KampekiMarketCSS.css">
+      <Button fx:id="btnHome" layoutX="25.0" layoutY="544.0" mnemonicParsing="false" onAction="#clicHome" prefHeight="53.0" prefWidth="78.0" stylesheets="@../resources/KampekiMarketCSS.css">
          <graphic>
             <ImageView fitHeight="67.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -225,5 +223,6 @@
             <String fx:value="button3" />
          </styleClass>
       </Button>
+      <ImageView fx:id="imgPrueba" fitHeight="150.0" fitWidth="200.0" layoutX="622.0" layoutY="189.0" onDragDropped="#imageViewDragDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

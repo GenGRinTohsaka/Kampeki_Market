@@ -1,7 +1,7 @@
-
 package org.derianhernandez.bean;
 
 public class Productos {
+
     private String codigoProducto;
     private String descripcionProducto;
     private double precioUnitario;
@@ -98,13 +98,13 @@ public class Productos {
     public void setCodigoProveedor(int codigoProveedor) {
         this.codigoProveedor = codigoProveedor;
     }
-    
+
     @Override
     public String toString() {
-        return getCodigoProducto() + " | " + getDescripcionProducto()+ " | "
-                + getPrecioUnitario() + " | " + getPrecioDocena()+ " | " +
-                getPrecioMayor()+ " | "+ getImagenProducto()+ " | " +
-                getExistencia() + " | " + getCodigoTipoProducto() + " | "
+        return getCodigoProducto() + " | " + getDescripcionProducto() + " | "
+                + getPrecioUnitario() + " | " + getPrecioDocena() + " | "
+                + getPrecioMayor() + " | " + getImagenProducto() + " | "
+                + getExistencia() + " | " + getCodigoTipoProducto() + " | "
                 + getCodigoProveedor();
     }
 }

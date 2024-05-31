@@ -182,9 +182,9 @@ public class Main extends Application {
      
      public void productosView(){
         try{
-            ProductosViewController productosView = (ProductosViewController) cambiarEscena("ProductosView.fxml", 1076, 607);
+            ProductosViewController productosView = (ProductosViewController) cambiarEscena("ProductosView.fxml", 1171, 658);
             productosView.setEscenarioPrincipal(this);
-            this.escenarioPrincipal.setTitle("Cargo Empleado");
+            this.escenarioPrincipal.setTitle("Productos");
         } catch(Exception e){
             e.printStackTrace();
         }

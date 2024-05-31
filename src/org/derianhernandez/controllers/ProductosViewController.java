@@ -5,7 +5,9 @@
  */
 package org.derianhernandez.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javax.swing.JOptionPane;
 import org.derianhernandez.bean.Productos;
 import org.derianhernandez.bean.Proveedores;
@@ -98,6 +103,9 @@ public class ProductosViewController implements Initializable {
     private ComboBox cmbCP;
     @FXML
     private ComboBox cmbCTP;
+    @FXML
+    private ImageView imgPrueba;
+    private String url;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -207,7 +215,7 @@ public class ProductosViewController implements Initializable {
         txtPrecioU.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
         txtPrecioD.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioDocena()));
         txtPrecioM.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getPrecioMayor()));
-        txtImagen.setText(((Productos) tblP.getSelectionModel().getSelectedItem()).getImagenProducto());
+        imgPrueba.setImage(new Image(((Productos) tblP.getSelectionModel().getSelectedItem()).getImagenProducto()));
         txtExistencia.setText(String.valueOf(((Productos) tblP.getSelectionModel().getSelectedItem()).getExistencia()));
         cmbCTP.getSelectionModel().select(buscarTipoProducto(((Productos) tblP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
         cmbCP.getSelectionModel().select(buscarProveedor(((Productos) tblP.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
@@ -357,7 +365,7 @@ public class ProductosViewController implements Initializable {
             registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
             registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
             registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
-            registro.setImagenProducto(txtImagen.getText());
+            registro.setImagenProducto(url);
             registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
             registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
             registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
@@ -385,7 +393,7 @@ public class ProductosViewController implements Initializable {
         txtExistencia.setEditable(false);
         cmbCTP.setDisable(true);
         cmbCP.setDisable(true);
-        txtImagen.setEditable(false);
+        imgPrueba.setDisable(true);
     }
 
     public void activarControles() {
@@ -393,7 +401,7 @@ public class ProductosViewController implements Initializable {
         txtDescripcionP.setEditable(true);
         cmbCTP.setDisable(false);
         cmbCP.setDisable(false);
-        txtImagen.setEditable(true);
+        imgPrueba.setDisable(false);
     }
 
     public void limpiarControles() {
@@ -403,10 +411,10 @@ public class ProductosViewController implements Initializable {
         txtPrecioD.clear();
         txtPrecioM.clear();
         txtExistencia.clear();
+        imgPrueba.setImage(null);
         tblP.getSelectionModel().getSelectedItem();
         cmbCTP.getSelectionModel().getSelectedItem();
         cmbCP.getSelectionModel().getSelectedItem();
-        txtImagen.clear();
 
     }
 
@@ -417,7 +425,7 @@ public class ProductosViewController implements Initializable {
         registro.setPrecioDocena(0);
         registro.setPrecioUnitario(0);
         registro.setPrecioMayor(0);
-        registro.setImagenProducto(txtImagen.getText());
+        registro.setImagenProducto(url);
         registro.setExistencia(0);
         registro.setCodigoProveedor(((Proveedores) cmbCP.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         registro.setCodigoTipoProducto(((TipoProducto) cmbCTP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
@@ -447,4 +455,32 @@ public class ProductosViewController implements Initializable {
             escenarioPrincipal.menuPrincipalView();
         }
     }
+
+    @FXML
+    public void imageViewDragDropped(DragEvent event) throws MalformedURLException {
+        Productos p = new Productos();
+        Dragboard dg = event.getDragboard();
+        if (dg.hasImage() || dg.hasFiles()) {
+            try {
+                imgPrueba.setImage(new Image(new FileInputStream(dg.getFiles().get(0))));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            url = dg.getFiles().get(0).toURI().toURL().toString();
+            
+        }
+    }
+    
+    @FXML
+    public void imageViewDragOver(DragEvent event){
+        Dragboard dg = event.getDragboard();
+        if(dg.hasImage() || dg.hasFiles()){
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+        
+        event.consume(); 
+        
+    }
 }
+
+
