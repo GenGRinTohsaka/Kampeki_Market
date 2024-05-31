@@ -77,7 +77,7 @@ que en scene builder no se pueden aplicar.
 }
 
 .left-form{
-    -fx-background-color: linear-gradient(to bottom left, white, #a349a4);
+    -fx-background-color: linear-gradient(to bottom left, skyblue, deeppink);
 }
 
 .right-pane{

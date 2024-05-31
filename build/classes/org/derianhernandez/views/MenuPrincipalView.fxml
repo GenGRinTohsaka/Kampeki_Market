@@ -50,6 +50,7 @@
                         <MenuItem fx:id="btnDetalleCompra" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Detalle Compra" />
                      </items>
                   </Menu>
+                  <MenuItem fx:id="btnLogin" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Login" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Reportes">

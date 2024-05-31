@@ -295,6 +295,7 @@ public class MenuComprasController implements Initializable {
         txtCodigoC.setEditable(false);
         txtDescripcionC.setEditable(false);
         txtTotalC.setEditable(false);
+        dpFC.setDisable(true);
     }
 
     public void activarControles() {
@@ -306,7 +307,8 @@ public class MenuComprasController implements Initializable {
     public void limpiarControles() {
         txtCodigoC.clear();
         txtDescripcionC.clear();
-        txtTotalC.clear();
+        txtTotalC.clear();  
+        dpFC.getEditor().clear();
     }
 
 }

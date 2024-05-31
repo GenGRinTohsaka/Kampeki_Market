@@ -20,6 +20,7 @@ import org.derianhernandez.controllers.DetalleFacturaViewController;
 import org.derianhernandez.controllers.EmailProveedorViewController;
 import org.derianhernandez.controllers.EmpleadosViewController;
 import org.derianhernandez.controllers.FacturasViewController;
+import org.derianhernandez.controllers.LoginViewController;
 import org.derianhernandez.controllers.MenuClientesController;
 import org.derianhernandez.controllers.MenuComprasController;
 import org.derianhernandez.controllers.MenuPrincipalController;
@@ -245,6 +246,16 @@ public class Main extends Application {
             TelefonoProveedorViewController telefonoProveedorView = (TelefonoProveedorViewController) cambiarEscena("TelefonoProveedorView.fxml",1062,593);
             telefonoProveedorView.setEscenarioPrincipal(this);
             this.escenarioPrincipal.setTitle("Telefono Proveedor");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void loginView() {
+        try{
+            LoginViewController loginView = (LoginViewController) cambiarEscena("LoginView.fxml",586,401);
+            loginView.setEscenarioPrincipal(this);
+            this.escenarioPrincipal.setTitle("Login de Usuarios");
         }catch(Exception e){
             e.printStackTrace();
         }

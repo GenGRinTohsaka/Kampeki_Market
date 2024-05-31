@@ -264,7 +264,7 @@
             <Tooltip text="Regresar al inicio" />
          </tooltip>
       </Button>
-      <ImageView fx:id="imgPrueba" fitHeight="150.0" fitWidth="176.0" layoutX="622.0" layoutY="189.0" onDragDropped="#imageViewDragDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #a349a4;">
+      <ImageView fx:id="imgPrueba" fitHeight="150.0" fitWidth="176.0" layoutX="622.0" layoutY="189.0" onDragDropped="#imageViewDragDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/dragAndDrop.jpg" />
          </image>

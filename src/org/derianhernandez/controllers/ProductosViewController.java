@@ -411,7 +411,7 @@ public class ProductosViewController implements Initializable {
         txtPrecioD.clear();
         txtPrecioM.clear();
         txtExistencia.clear();
-        imgPrueba.setImage(null);
+        imgPrueba.setImage(new Image("/org/derianhernandez/images/dragAndDrop.jpg"));
         tblP.getSelectionModel().getSelectedItem();
         cmbCTP.getSelectionModel().getSelectedItem();
         cmbCP.getSelectionModel().getSelectedItem();

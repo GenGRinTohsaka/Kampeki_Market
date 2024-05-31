@@ -76,3 +76,10 @@ que en scene builder no se pueden aplicar.
     -fx-border-width: 10px;
 }
 
+.left-form{
+    -fx-background-color: linear-gradient(to bottom left, skyblue, deeppink);
+}
+
+.right-pane{
+    -fx-background-color: white;
+}
