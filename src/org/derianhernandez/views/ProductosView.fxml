@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +22,7 @@
             <Image url="@../images/Productos.png" />
          </image>
       </ImageView>
-      <GridPane alignment="CENTER" layoutX="32.0" layoutY="123.0" prefHeight="241.0" prefWidth="210.0">
+      <GridPane alignment="CENTER" layoutX="32.0" layoutY="123.0" prefHeight="241.0" prefWidth="210.0" styleClass="grid-pane" stylesheets="@../resources/KampekiMarketCSS.css">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -37,18 +38,27 @@
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
+               <tooltip>
+                  <Tooltip text="Boton que sirve para empezar a agregar " />
+               </tooltip>
             </Button>
             <Button fx:id="btnEliminarP" mnemonicParsing="false" onAction="#eliminar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button2" />
                </styleClass>
+               <tooltip>
+                  <Tooltip text="Sirve para eliminar registros" />
+               </tooltip>
             </Button>
             <Button fx:id="btnEditarP" mnemonicParsing="false" onAction="#editar" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button2" />
                   <String fx:value="button3" />
                </styleClass>
+               <tooltip>
+                  <Tooltip text="Encargado de la edicion de registros" />
+               </tooltip>
             </Button>
             <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reporte" prefHeight="32.0" prefWidth="85.0" stylesheets="@../resources/KampekiMarketCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <styleClass>
@@ -78,7 +88,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <TableView fx:id="tblP" layoutX="186.0" layoutY="438.0" onMouseClicked="#seleccionarElemento" prefHeight="194.0" prefWidth="841.0" stylesheets="@../resources/KampekiMarketCSS.css">
+      <TableView fx:id="tblP" layoutX="233.0" layoutY="439.0" onMouseClicked="#seleccionarElemento" prefHeight="194.0" prefWidth="841.0" stylesheets="@../resources/KampekiMarketCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoP" minWidth="93.44" prefWidth="75.0" text="Codigo Producto" />
             <TableColumn fx:id="colDescripcionP" minWidth="93.44" prefWidth="75.0" text="Descripcion Producto" />
@@ -94,6 +104,9 @@
             <String fx:value="table-row-cell" />
             <String fx:value="table-view" />
          </styleClass>
+         <tooltip>
+            <Tooltip text="Muestra los datos de texto de esta entidad" />
+         </tooltip>
       </TableView>
       <GridPane layoutX="264.0" layoutY="99.0" prefHeight="59.0" prefWidth="210.0">
          <columnConstraints>
@@ -105,7 +118,10 @@
          </rowConstraints>
          <children>
             <Label text="Codigo Producto" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtCodigoCP" prefHeight="25.0" prefWidth="101.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtCodigoCP" prefHeight="25.0" prefWidth="101.0" styleClass="text-field" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="No puede coincidir con otros registros" />
+               </tooltip></TextField>
          </children>
       </GridPane>
       <GridPane layoutX="258.0" layoutY="142.0" prefHeight="59.0" prefWidth="130.0">
@@ -118,10 +134,13 @@
          </rowConstraints>
          <children>
             <Label text="Unitario" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtPrecioU" GridPane.columnIndex="1" />
+            <TextField fx:id="txtPrecioU" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Precio Unitario del Producto" />
+               </tooltip></TextField>
          </children>
       </GridPane>
-      <GridPane layoutX="493.0" layoutY="93.0" prefHeight="59.0" prefWidth="349.0">
+      <GridPane layoutX="489.0" layoutY="99.0" prefHeight="59.0" prefWidth="349.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0" minWidth="10.0" prefWidth="134.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="369.0" minWidth="10.0" prefWidth="215.0" />
@@ -131,7 +150,10 @@
          </rowConstraints>
          <children>
             <Label text="Descripcion Producto" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtDescripcionP" prefHeight="25.0" prefWidth="145.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtDescripcionP" prefHeight="25.0" prefWidth="145.0" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Escribe una corta descripcion del producto" />
+               </tooltip></TextField>
          </children>
       </GridPane>
       <GridPane fx:id="txtCodigoP" layoutX="585.0" layoutY="142.0" prefHeight="59.0" prefWidth="158.0">
@@ -144,7 +166,10 @@
          </rowConstraints>
          <children>
             <Label text="Precio Mayor" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtPrecioM" prefHeight="26.0" prefWidth="186.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtPrecioM" prefHeight="26.0" prefWidth="186.0" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Precio por Mayor del Producto" />
+               </tooltip></TextField>
          </children>
       </GridPane>
       <GridPane layoutX="405.0" layoutY="142.0" prefHeight="59.0" prefWidth="158.0">
@@ -157,7 +182,10 @@
          </rowConstraints>
          <children>
             <Label text="Precio Docena" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtPrecioD" GridPane.columnIndex="1" />
+            <TextField fx:id="txtPrecioD" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Precio por Docena del Producto" />
+               </tooltip></TextField>
          </children>
       </GridPane>
       <GridPane layoutX="263.0" layoutY="195.0" prefHeight="138.0" prefWidth="118.0">
@@ -181,7 +209,10 @@
          </rowConstraints>
          <children>
             <Label text="Existencia" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtExistencia" GridPane.columnIndex="1" />
+            <TextField fx:id="txtExistencia" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Existencia del Producto" />
+               </tooltip></TextField>
          </children>
       </GridPane>
       <GridPane layoutX="258.0" layoutY="317.0" prefHeight="82.0" prefWidth="598.0">
@@ -194,7 +225,10 @@
          </rowConstraints>
          <children>
             <Label text="Codigo Tipo Producto" GridPane.halignment="CENTER" />
-            <ComboBox fx:id="cmbCTP" prefHeight="22.0" prefWidth="452.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCTP" prefHeight="22.0" prefWidth="452.0" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Selecciona acorde al producto" />
+               </tooltip></ComboBox>
          </children>
       </GridPane>
       <GridPane layoutX="263.0" layoutY="377.0" prefHeight="78.0" prefWidth="686.0">
@@ -207,7 +241,11 @@
          </rowConstraints>
          <children>
             <Label prefHeight="14.0" prefWidth="109.0" text="Codigo Proveedor" GridPane.halignment="CENTER" />
-            <ComboBox fx:id="cmbCP" prefHeight="26.0" prefWidth="610.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCP" prefHeight="26.0" prefWidth="610.0" stylesheets="@../resources/KampekiMarketCSS.css" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Selecciona el proveedor de este producto" />
+               </tooltip>
+            </ComboBox>
          </children>
       </GridPane>
       <Button fx:id="btnHome" layoutX="25.0" layoutY="544.0" mnemonicParsing="false" onAction="#clicHome" prefHeight="53.0" prefWidth="78.0" stylesheets="@../resources/KampekiMarketCSS.css">
@@ -222,7 +260,14 @@
             <String fx:value="button2" />
             <String fx:value="button3" />
          </styleClass>
+         <tooltip>
+            <Tooltip text="Regresar al inicio" />
+         </tooltip>
       </Button>
-      <ImageView fx:id="imgPrueba" fitHeight="150.0" fitWidth="200.0" layoutX="622.0" layoutY="189.0" onDragDropped="#imageViewDragDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgPrueba" fitHeight="150.0" fitWidth="176.0" layoutX="622.0" layoutY="189.0" onDragDropped="#imageViewDragDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #a349a4;">
+         <image>
+            <Image url="@../images/dragAndDrop.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

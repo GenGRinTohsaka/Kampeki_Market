@@ -7,7 +7,7 @@ que en scene builder no se pueden aplicar.
     Autor: Derian Hernandez
     Carnet: 2023346
     Fecha de Creacion: 18/04/2024
-    Fecha de Actualizacion: 25/04/2024
+    Fecha de Actualizacion: 30/05/2024
 */
 
 .menu-bar{
@@ -48,3 +48,31 @@ que en scene builder no se pueden aplicar.
 .table-row-cell:selected{
     -fx-background-color: #252440;
 }
+
+
+.text-field {
+    -fx-border-color: #a349a4;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box{
+    -fx-background-color: white;
+    -fx-border-color: #a349a4;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-background-radius: 5px;
+}
+
+
+.table-view{
+        -fx-border-color: #a349a4;
+        -fx-border-radius: 5px;
+}
+
+.anchor-pane{
+    -fx-border-radius: 5px;
+    -fx-border-color: black;
+    -fx-border-width: 10px;
+}
+
