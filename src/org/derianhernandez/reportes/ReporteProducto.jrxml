@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProducto" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2fba22db-490e-425d-a301-2093ba230c7f">
+	<property name="ireport.zoom" value="4.177248169415664"/>
+	<property name="ireport.x" value="1545"/>
+	<property name="ireport.y" value="836"/>
+	<queryString>
+		<![CDATA[call sp_ListarProductos]]>
+	</queryString>
+	<field name="codigoProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcionProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioUnitario" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioDocena" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioMayor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="imagenProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="existencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigoTipoProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigoProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802">
+			<image>
+				<reportElement x="0" y="16" width="555" height="786" uuid="55867ff5-9399-4f1f-b629-7c0942a10f34"/>
+				<imageExpression><![CDATA["C:\\Users\\Informatica\\Desktop\\Kampeki_Market\\Kampeki_Market\\src\\org\\derianhernandez\\images\\ReporteProducto.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="56" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="54" width="119" height="20" uuid="6d037582-11ca-49ed-afec-abc699242859"/>
+				<text><![CDATA[Descripcion del Producto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="33" y="73" width="482" height="1" uuid="46001cb7-6716-43dc-8754-4589653c492d"/>
+			</line>
+			<staticText>
+				<reportElement x="236" y="1" width="100" height="20" uuid="5dd53a95-b2e3-47f2-9145-4eac89372b79"/>
+				<text><![CDATA[precioUnitario]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="46" y="14" width="89" height="20" uuid="b3068a9c-f9c7-4d63-8f23-25ff8f607033"/>
+				<textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="14" width="100" height="20" uuid="c3cfc65b-09c4-4182-b9b7-30b95be4588b"/>
+				<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="165" y="0" width="1" height="62" uuid="d1d88129-baac-405a-939a-951c59ac25d9"/>
+			</line>
+			<line>
+				<reportElement x="33" y="61" width="482" height="1" uuid="c37df64f-07e3-4dd4-a8f9-e23a9fc7fed2"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
