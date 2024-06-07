@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.derianhernandez.bean.Clientes;
 import org.derianhernandez.db.Conexion;
+import org.derianhernandez.reportes.GenerarReportes;
 import org.derianhernandez.system.Main;
 
 /* Herencia Multiple concepto, interfaces. POO
@@ -305,6 +308,9 @@ public class MenuClientesController implements Initializable {
 
     public void reporte() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReportes();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -352,6 +358,12 @@ public class MenuClientesController implements Initializable {
 
     public void setEscenarioPrincipal(Main escenarioPrincipal) {
         this.escenarioPrincipal = escenarioPrincipal;
+    }
+    
+    public void imprimirReportes(){
+        Map parametros = new HashMap();
+        parametros.put("codigoCliente", null);
+        GenerarReportes.mostrarReporte("ReporteCliente.jasper", "Reporte de los Clientes", parametros);
     }
 
     @FXML

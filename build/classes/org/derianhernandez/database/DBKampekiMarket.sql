@@ -58,7 +58,7 @@ create table Productos(
     precioUnitario decimal(10,2),
     precioDocena decimal(10,2),
     precioMayor decimal(10,2),
-    imagenProducto varchar(70),
+    imagenProducto varchar(200),
     existencia int,
 	codigoTipoProducto int,
     codigoProveedor int,
@@ -135,6 +135,13 @@ create table DetalleFactura(
 		references Factura(numeroFactura),
 	constraint FK_codigoProducto_Productos foreign key(codigoProducto)
 		references Productos(codigoProducto)
+);
+
+create table Usuarios(
+	nombreUsuario varchar(45) not null,
+    contraseña varchar(100) not null,
+    nivelPermisos int not null,
+    primary key PK_nombreUsuario(nombreUsuario)
 );
 
 Delimiter $$
@@ -504,7 +511,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_AgregarProducto(in codigoProducto varchar(15), in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(70),
+	create procedure sp_AgregarProducto(in codigoProducto varchar(15), in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(200),
     in existencia int, in codigoTipoProducto int, in codigoProveedor int)
     Begin
 		Insert Into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
@@ -561,7 +568,7 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure  sp_editarProducto(in _codigoProducto varchar(15), in _descripcionProducto varchar(45), in _precioUnitario decimal(10,2), in _precioDocena decimal(10,2), in _precioMayor decimal(10,2), in _imagenProducto varchar(70),
+	create procedure  sp_editarProducto(in _codigoProducto varchar(15), in _descripcionProducto varchar(45), in _precioUnitario decimal(10,2), in _precioDocena decimal(10,2), in _precioMayor decimal(10,2), in _imagenProducto varchar(200),
     in _existencia int, in _codigoTipoProducto int, in _codigoProveedor int)
     Begin
 		Update productos P
@@ -838,6 +845,58 @@ Delimiter $$
         where codigoDetalleFactura = _codigoDetalleFactura;
     End $$
 Delimiter ;
+
+-- -------------------------------------------------------------------------------------------  Usuarios ----------------------------------------------------------------------------------
+Delimiter $$
+	create procedure sp_AgregarUsuario(in nombreUsuario varchar(45), in contraseña varchar(100), in nivelUsuario int)
+    Begin
+		Insert Into Usuarios(nombreUsuario,contraseña,nivelUsuario)
+			values(nombreUsuario,contraseña,nivelUsuario);
+    End $$
+Delimiter ; 
+
+Delimiter $$
+	create procedure sp_ListarUsuarios()
+    Begin
+		select 
+			U.nombreUsuario,
+            U.contraseña,
+            U.nivelUsuario
+		from Usuarios U;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarUsuario(in _nombreUsuario varchar(45))
+    Begin
+		select 
+			U.nombreUsuario,
+            U.contraseña,
+            U.nivelUsuario
+		from Usuarios U
+        where U.nombreUsuario = _nombreUsuario;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ActualizarUsuario(in _nombreUsuario varchar(45), in _contraseña varchar(100), in _nivelUsuario int)
+    Begin
+		update Usuarios U
+			set
+                U.contraseña = _contraseña,
+                U.nivelUsuario = _nivelUsuario
+			where U.nombreUsuario = _nombreUsuario;
+    End $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EliminarUsuario(in _nombreUsuario varchar(45))
+    Begin
+		delete from Usuarios 
+			where nombreUsuario = _nombreUsuario;
+    End $$
+Delimiter ;
+-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------------------------------------------------------------------------
 
 Delimiter $$
