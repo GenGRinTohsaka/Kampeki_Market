@@ -242,7 +242,7 @@ public class DetalleFacturaViewController implements Initializable {
             procedimiento.setDouble(2, registro.getPrecioUnitario());
             procedimiento.setInt(3, registro.getCantidad());
             procedimiento.setInt(4, registro.getNumeroFactura());
-            procedimiento.setInt(5, registro.getCodigoDetalleFactura());
+            procedimiento.setString(5, registro.getCodigoProducto());
 
             procedimiento.execute();
 
@@ -264,7 +264,7 @@ public class DetalleFacturaViewController implements Initializable {
             procedimiento.setDouble(2, registro.getPrecioUnitario());
             procedimiento.setInt(3, registro.getCantidad());
             procedimiento.setInt(4, registro.getNumeroFactura());
-            procedimiento.setInt(5, registro.getCodigoDetalleFactura());
+            procedimiento.setString(5, registro.getCodigoProducto());
 
             procedimiento.execute();
         } catch (Exception e) {

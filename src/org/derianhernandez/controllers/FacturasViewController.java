@@ -32,13 +32,13 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import org.derianhernandez.bean.Clientes;
 import org.derianhernandez.bean.Compras;
+import org.derianhernandez.bean.DetalleFactura;
 import org.derianhernandez.bean.Empleados;
 import org.derianhernandez.bean.Facturas;
 import org.derianhernandez.db.Conexion;
 import org.derianhernandez.reportes.GenerarReportes;
 import org.derianhernandez.system.Main;
-
-
+import org.derianhernandez.controllers.DetalleFacturaViewController;;
 
 /**
  * FXML Controller class
@@ -117,12 +117,14 @@ public class FacturasViewController implements Initializable {
     private enum operaciones {
         AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO
     }
+
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
     public ObservableList<Facturas> getFacturas() {
         ArrayList<Facturas> lista = new ArrayList();
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ListarFactura()}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_ListarFactura()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
                 lista.add(new Facturas(resultado.getInt("numeroFactura"),
@@ -143,7 +145,8 @@ public class FacturasViewController implements Initializable {
     public ObservableList<Clientes> getClientes() {
         ArrayList<Clientes> lista = new ArrayList();
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ListarClientes()}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_ListarClientes()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
                 lista.add(new Clientes(resultado.getInt("codigoCliente"),
@@ -165,7 +168,8 @@ public class FacturasViewController implements Initializable {
     public ObservableList<Empleados> getEmpleados() {
         ArrayList<Empleados> lista = new ArrayList<Empleados>();
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ListarEmpleados()}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_ListarEmpleados()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
                 lista.add(new Empleados(resultado.getInt("codigoEmpleado"),
@@ -174,8 +178,7 @@ public class FacturasViewController implements Initializable {
                         resultado.getDouble("sueldo"),
                         resultado.getString("direccion"),
                         resultado.getString("turno"),
-                        resultado.getInt("codigoCargoEmpleado")
-                ));
+                        resultado.getInt("codigoCargoEmpleado")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,7 +189,8 @@ public class FacturasViewController implements Initializable {
     public Empleados buscarEmpleado(int codigoEmpleado) {
         Empleados resultado = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_BuscarEmpleados(?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_BuscarEmpleados(?)}");
             procedimiento.setInt(1, codigoEmpleado);
             ResultSet registro = procedimiento.executeQuery();
             while (registro.next()) {
@@ -208,7 +212,8 @@ public class FacturasViewController implements Initializable {
     public Clientes buscarCliente(int codigoCliente) {
         Clientes resultado = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_BuscarClientes(?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_BuscarClientes(?)}");
             procedimiento.setInt(1, codigoCliente);
             ResultSet registro = procedimiento.executeQuery();
             while (registro.next()) {
@@ -242,8 +247,10 @@ public class FacturasViewController implements Initializable {
         txtEstadoF.setText(((Facturas) tblF.getSelectionModel().getSelectedItem()).getEstado());
         txtTotalF.setText(String.valueOf(((Facturas) tblF.getSelectionModel().getSelectedItem()).getTotalFactura()));
         dpFF.setValue(((Facturas) tblF.getSelectionModel().getSelectedItem()).getFechaFactura().toLocalDate());
-        cmbCodigoC.getSelectionModel().select(buscarCliente(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoCliente()));
-        cmbCodigoE.getSelectionModel().select(buscarEmpleado(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoEmpleado()));
+        cmbCodigoC.getSelectionModel()
+                .select(buscarCliente(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoCliente()));
+        cmbCodigoE.getSelectionModel()
+                .select(buscarEmpleado(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoEmpleado()));
     }
 
     public void guardar() {
@@ -257,7 +264,8 @@ public class FacturasViewController implements Initializable {
         registro.setCodigoEmpleado(((Empleados) cmbCodigoE.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
 
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarFactura(?, ?, ?, ?, ?, ?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_AgregarFactura(?, ?, ?, ?, ?, ?)}");
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
             procedimiento.setDouble(3, registro.getTotalFactura());
@@ -275,13 +283,15 @@ public class FacturasViewController implements Initializable {
 
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarFactura(?,?,?,?,?,?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion()
+                    .prepareCall("{call sp_EditarFactura(?,?,?,?,?,?)}");
             Facturas registro = (Facturas) tblF.getSelectionModel().getSelectedItem();
             registro.setEstado(txtEstadoF.getText());
             registro.setTotalFactura(Double.parseDouble(txtTotalF.getText()));
             registro.setFechaFactura(Date.valueOf(dpFF.getValue()));
             registro.setCodigoCliente(((Clientes) cmbCodigoC.getSelectionModel().getSelectedItem()).getCodigoCliente());
-            registro.setCodigoEmpleado(((Empleados) cmbCodigoE.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
+            registro.setCodigoEmpleado(
+                    ((Empleados) cmbCodigoE.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
             procedimiento.setDouble(3, registro.getTotalFactura());
@@ -404,8 +414,13 @@ public class FacturasViewController implements Initializable {
     public void reporte() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
-                imprimirReportes();
-                break;
+                if (tblF.getSelectionModel().getSelectedItem() == null) {
+                    JOptionPane.showMessageDialog(null, "Debe de seleccionar alguna factura");
+                } else {
+                    imprimirReportes();
+                    break;
+                }
+
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -427,9 +442,9 @@ public class FacturasViewController implements Initializable {
         }
     }
 
-    public void imprimirReportes(){
+    public void imprimirReportes() {
         Map parametros = new HashMap();
-        parametros.put("numeroFactura", null);
+        parametros.put("_numeroFactura",Integer.parseInt(txtNumeroF.getText()));
         GenerarReportes.mostrarReporte("ReporteFactura.jasper", "Factura", parametros);
 
     }

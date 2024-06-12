@@ -1059,18 +1059,19 @@ Delimiter $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_ListarReporteFactura()
+	create procedure sp_ListarReporteFactura(in _numeroFactura int)
 	Begin
 		select Factura.numeroFactura, Factura.fechaFactura, Factura.totalFactura,
 			   Clientes.nitCliente, Clientes.nombreCliente, Clientes.apellidoCliente,
                Empleados.nombresEmpleado,Empleados.apellidosEmpleado,Empleados.turno,
                Productos.codigoProducto,Productos.descripcionProducto,
                DetalleFactura.precioUnitario,DetalleFactura.cantidad
-               from DetalleFactura
-               inner join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+               from Factura
+               inner join DetalleFactura on DetalleFactura.numeroFactura = Factura.numeroFactura
                inner join Productos on Productos.codigoProducto = DetalleFactura.codigoProducto
                inner join Empleados on Empleados.codigoEmpleado = Factura.codigoEmpleado
-               inner join Clientes on Clientes.codigoCliente = Factura.codigoCliente;
+               inner join Clientes on Clientes.codigoCliente = Factura.codigoCliente
+               where Factura.numeroFactura = _numeroFactura;
 	End $$
 Delimiter ;
 
@@ -1089,7 +1090,9 @@ call sp_AgregarDetalleCompra(1,12.00,4,'1',1);
 call sp_AgregarDetalleCompra(2,10.00,1,'2',2);
 call sp_AgregarEmpleados(1,'Derian','Hernandez',2000,'Ciudad Quetzal','Vespertino',1);
 call sp_AgregarFactura(1,'Feliz',0,'2024/01/01',1,1);
+call sp_AgregarFactura(2,'Feliz',0,'2024/01/01',1,1);
 call sp_AgregarDetalleFactura(1,0,1,1,1);
+call sp_AgregarDetalleFactura(2,0,1,2,1);
 set global time_zone = '-6:00';
 -- --------------------------------------------------------------------------------------------------------------------------
 -- ------------------------------------------------ lIstar ------------------------------------------------------
@@ -1099,4 +1102,4 @@ call sp_ListarCompras();
 call sp_ListarDetalleFactura();
 call sp_ListarEmpleados();
 call sp_ListarTelefonoProveedor();
-call sp_ListarReporteFactura();
+call sp_ListarReporteFactura(1);
