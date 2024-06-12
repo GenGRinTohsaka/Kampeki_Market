@@ -114,7 +114,7 @@ create table Factura(
 	numeroFactura int not null,
     estado varchar(50),
     totalFactura decimal(10,2),
-    fechaFactura varchar(45),
+    fechaFactura date,
     codigoCliente int not null,
     codigoEmpleado int not null,
     primary key PK_numeroFactura(numeroFactura),
@@ -663,7 +663,7 @@ Delimiter ;
 -- ----------------------------------- FACTURA -------------------------------------------------------------------
 -- ----------------------------------- AGREGAR ------------------------------------
 Delimiter $$
-	create procedure sp_AgregarFactura(in numeroFactura int, estado varchar(50), totalFactura decimal(10,2), fechaFactura varchar(45), codigoCliente int, codigoEmpleado int)
+	create procedure sp_AgregarFactura(in numeroFactura int, estado varchar(50), totalFactura decimal(10,2), fechaFactura date, codigoCliente int, codigoEmpleado int)
     Begin
 		Insert into Factura(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado)
         values(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado);
@@ -712,7 +712,7 @@ Delimiter ;
 
 -- --------------------------------- EDITAR ------------------------------------------
 Delimiter $$
-	create procedure sp_EditarFactura(in _numeroFactura int, _estado varchar(50), _totalFactura decimal(10,2), _fechaFactura varchar(45), _codigoCliente int, _codigoEmpleado int)
+	create procedure sp_EditarFactura(in _numeroFactura int, _estado varchar(50), _totalFactura decimal(10,2), _fechaFactura date, _codigoCliente int, _codigoEmpleado int)
     Begin
 		Update Factura F
         set
@@ -984,6 +984,7 @@ Delimiter $$
 	End $$
 Delimiter ;
 
+
 Delimiter $$
 	create procedure sp_AsignarTotalCompras(in numeroDocumento int)
     Begin
@@ -996,15 +997,6 @@ Delimiter $$
         where C.numeroDocumento = numeroDocumento; 
     End $$
 Delimiter ;
-
-Delimiter $$
-	Create Trigger tr_DetalleComprasTotal_After_Insert
-    After Insert on DetalleCompra
-    for each row
-    Begin
-		call sp_AsignarTotalCompras(new.numeroDocumento);
-	End $$
-Delimiter ;	
 
 Delimiter $$
 	create procedure sp_AgregarExistencia(codigoProducto varchar(15),cantidad int)
@@ -1021,20 +1013,66 @@ Delimiter $$
     After Insert on DetalleCompra
     for each row
     Begin
-		call sp_AgregarExistencia(NEW.codigoProducto,NEW.cantidad);
+    		call sp_AgregarExistencia(NEW.codigoProducto,NEW.cantidad);
     End $$
+Delimiter ;
+
+
+Delimiter $$
+	Create Trigger tr_DetalleComprasTotal_After_Insert
+    after Insert on DetalleCompra
+    for each row
+    Begin
+		call sp_AsignarTotalCompras(new.numeroDocumento);
+	End $$
+Delimiter ;	
+
+Delimiter $$
+	create trigger tr_InsertarPrecioDetalelFactura_Before_Insert
+    Before insert on DetalleFactura
+	for each row
+		Begin
+			set new.precioUnitario = (Select precioUnitario from Productos
+									  Where Productos.codigoProducto = new.codigoProducto);
+		End $$
 Delimiter ;
 
 Delimiter $$
-	Create Trigger tr_DetalleCompraExistencia_After_Update
-    After Update on DetalleCompra
-    for each row
+	create procedure sp_ActualizarTotalFactura(in _numeroFactura int , _totalFactura decimal(10,2))
     Begin
-		call sp_AgregarExistencia(NEW.codigoProducto,NEW.cantidad);
-    End $$
+		Update Factura F
+        set
+		F.totalFactura = _totalFactura
+        Where F.numeroFactura = _numeroFactura;
+	End $$
 Delimiter ;
 
+Delimiter $$
+	Create trigger tr_InsertarTotalFactura_Before_Insert
+    after insert on DetalleFactura
+    for each row
+		Begin
+			declare total decimal(10,2);
+            set total = ((Select sum(precioUnitario*cantidad) from DetalleFactura where DetalleFactura.numeroFactura = new.numeroFactura));
+            call sp_ActualizarTotalFactura(new.numeroFactura, total);
+		End $$
+Delimiter ;
 
+Delimiter $$
+	create procedure sp_ListarReporteFactura()
+	Begin
+		select Factura.numeroFactura, Factura.fechaFactura, Factura.totalFactura,
+			   Clientes.nitCliente, Clientes.nombreCliente, Clientes.apellidoCliente,
+               Empleados.nombresEmpleado,Empleados.apellidosEmpleado,Empleados.turno,
+               Productos.codigoProducto,Productos.descripcionProducto,
+               DetalleFactura.precioUnitario,DetalleFactura.cantidad
+               from DetalleFactura
+               inner join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+               inner join Productos on Productos.codigoProducto = DetalleFactura.codigoProducto
+               inner join Empleados on Empleados.codigoEmpleado = Factura.codigoEmpleado
+               inner join Clientes on Clientes.codigoCliente = Factura.codigoCliente;
+	End $$
+Delimiter ;
 
 
 
@@ -1055,9 +1093,10 @@ call sp_AgregarDetalleFactura(1,0,1,1,1);
 set global time_zone = '-6:00';
 -- --------------------------------------------------------------------------------------------------------------------------
 -- ------------------------------------------------ lIstar ------------------------------------------------------
-call sp_ListarTipoProducto();
+call sp_ListarTipoProducto();  
 call sp_ListarProductos();
 call sp_ListarCompras();
 call sp_ListarDetalleFactura();
 call sp_ListarEmpleados();
 call sp_ListarTelefonoProveedor();
+call sp_ListarReporteFactura();
