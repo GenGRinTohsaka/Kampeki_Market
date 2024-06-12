@@ -20,4 +20,9 @@ public class LoginViewController implements Initializable {
         this.escenarioPrincipal = escenarioPrincipal;
     }
          
+
+    public void waza(){
+        
+    }
+    /*Waza */
 }
