@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -127,7 +128,7 @@
          </rowConstraints>
          <children>
             <Label text="Fecha Factura" GridPane.halignment="CENTER" />
-            <TextField fx:id="txtFechaF" GridPane.columnIndex="1" />
+            <DatePicker fx:id="dpFF" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <GridPane layoutX="227.0" layoutY="243.0" prefHeight="59.0" prefWidth="507.0">

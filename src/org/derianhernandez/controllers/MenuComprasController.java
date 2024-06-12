@@ -302,6 +302,7 @@ public class MenuComprasController implements Initializable {
         txtCodigoC.setEditable(true);
         txtDescripcionC.setEditable(true);
         txtTotalC.setEditable(true);
+        dpFC.setDisable(false);
     }
 
     public void limpiarControles() {

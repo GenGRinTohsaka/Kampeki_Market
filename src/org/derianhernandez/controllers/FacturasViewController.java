@@ -7,9 +7,12 @@ package org.derianhernandez.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,16 +24,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import org.derianhernandez.bean.Clientes;
+import org.derianhernandez.bean.Compras;
 import org.derianhernandez.bean.Empleados;
 import org.derianhernandez.bean.Facturas;
 import org.derianhernandez.db.Conexion;
+import org.derianhernandez.reportes.GenerarReportes;
 import org.derianhernandez.system.Main;
+
+
 
 /**
  * FXML Controller class
@@ -67,7 +75,7 @@ public class FacturasViewController implements Initializable {
     @FXML
     private TextField txtTotalF;
     @FXML
-    private TextField txtFechaF;
+    private DatePicker dpFF;
     @FXML
     private ComboBox cmbCodigoC;
     @FXML
@@ -120,7 +128,7 @@ public class FacturasViewController implements Initializable {
                 lista.add(new Facturas(resultado.getInt("numeroFactura"),
                         resultado.getString("estado"),
                         resultado.getDouble("totalFactura"),
-                        resultado.getString("fechaFactura"),
+                        resultado.getDate("fechaFactura"),
                         resultado.getInt("codigoCliente"),
                         resultado.getInt("codigoEmpleado")));
             }
@@ -224,7 +232,7 @@ public class FacturasViewController implements Initializable {
         colNumeroF.setCellValueFactory(new PropertyValueFactory<Facturas, Integer>("numeroFactura"));
         colEstadoF.setCellValueFactory(new PropertyValueFactory<Facturas, String>("estado"));
         colTotalF.setCellValueFactory(new PropertyValueFactory<Facturas, Double>("totalFactura"));
-        colFechaF.setCellValueFactory(new PropertyValueFactory<Facturas, String>("fechaFactura"));
+        colFechaF.setCellValueFactory(new PropertyValueFactory<Facturas, DatePicker>("fechaFactura"));
         colCodigoC.setCellValueFactory(new PropertyValueFactory<Facturas, Integer>("codigoCliente"));
         colCodigoE.setCellValueFactory(new PropertyValueFactory<Facturas, Integer>("codigoEmpleado"));
     }
@@ -233,7 +241,7 @@ public class FacturasViewController implements Initializable {
         txtNumeroF.setText(String.valueOf(((Facturas) tblF.getSelectionModel().getSelectedItem()).getNumeroFactura()));
         txtEstadoF.setText(((Facturas) tblF.getSelectionModel().getSelectedItem()).getEstado());
         txtTotalF.setText(String.valueOf(((Facturas) tblF.getSelectionModel().getSelectedItem()).getTotalFactura()));
-        txtFechaF.setText(((Facturas) tblF.getSelectionModel().getSelectedItem()).getFechaFactura());
+        dpFF.setValue(((Facturas) tblF.getSelectionModel().getSelectedItem()).getFechaFactura().toLocalDate());
         cmbCodigoC.getSelectionModel().select(buscarCliente(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoCliente()));
         cmbCodigoE.getSelectionModel().select(buscarEmpleado(((Facturas) tblF.getSelectionModel().getSelectedItem()).getCodigoEmpleado()));
     }
@@ -243,8 +251,8 @@ public class FacturasViewController implements Initializable {
         Facturas registro = new Facturas();
         registro.setNumeroFactura(Integer.parseInt(txtNumeroF.getText()));
         registro.setEstado(txtEstadoF.getText());
-        registro.setTotalFactura(Double.parseDouble(txtTotalF.getText()));
-        registro.setFechaFactura(txtFechaF.getText());
+        registro.setTotalFactura(0);
+        registro.setFechaFactura(Date.valueOf(dpFF.getValue()));
         registro.setCodigoCliente(((Clientes) cmbCodigoC.getSelectionModel().getSelectedItem()).getCodigoCliente());
         registro.setCodigoEmpleado(((Empleados) cmbCodigoE.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
 
@@ -253,7 +261,7 @@ public class FacturasViewController implements Initializable {
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
             procedimiento.setDouble(3, registro.getTotalFactura());
-            procedimiento.setString(4, registro.getFechaFactura());
+            procedimiento.setDate(4, registro.getFechaFactura());
             procedimiento.setInt(5, registro.getCodigoCliente());
             procedimiento.setInt(6, registro.getCodigoEmpleado());
 
@@ -271,13 +279,13 @@ public class FacturasViewController implements Initializable {
             Facturas registro = (Facturas) tblF.getSelectionModel().getSelectedItem();
             registro.setEstado(txtEstadoF.getText());
             registro.setTotalFactura(Double.parseDouble(txtTotalF.getText()));
-            registro.setFechaFactura(txtFechaF.getText());
+            registro.setFechaFactura(Date.valueOf(dpFF.getValue()));
             registro.setCodigoCliente(((Clientes) cmbCodigoC.getSelectionModel().getSelectedItem()).getCodigoCliente());
             registro.setCodigoEmpleado(((Empleados) cmbCodigoE.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
             procedimiento.setDouble(3, registro.getTotalFactura());
-            procedimiento.setString(4, registro.getFechaFactura());
+            procedimiento.setDate(4, registro.getFechaFactura());
             procedimiento.setInt(5, registro.getCodigoCliente());
             procedimiento.setInt(6, registro.getCodigoEmpleado());
 
@@ -291,7 +299,7 @@ public class FacturasViewController implements Initializable {
         txtNumeroF.setEditable(false);
         txtEstadoF.setEditable(false);
         txtTotalF.setEditable(false);
-        txtFechaF.setEditable(false);
+        dpFF.setDisable(true);
         cmbCodigoC.setDisable(true);
         cmbCodigoE.setDisable(true);
     }
@@ -299,8 +307,8 @@ public class FacturasViewController implements Initializable {
     public void activarControles() {
         txtNumeroF.setEditable(true);
         txtEstadoF.setEditable(true);
-        txtTotalF.setEditable(true);
-        txtFechaF.setEditable(true);
+        txtTotalF.setEditable(false);
+        dpFF.setDisable(false);
         cmbCodigoC.setDisable(false);
         cmbCodigoE.setDisable(false);
     }
@@ -309,7 +317,7 @@ public class FacturasViewController implements Initializable {
         txtNumeroF.clear();
         txtEstadoF.clear();
         txtTotalF.clear();
-        txtFechaF.clear();
+        dpFF.getEditor().clear();
         cmbCodigoC.getSelectionModel().getSelectedItem();
         cmbCodigoE.getSelectionModel().getSelectedItem();
 
@@ -395,6 +403,9 @@ public class FacturasViewController implements Initializable {
 
     public void reporte() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReportes();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -414,5 +425,12 @@ public class FacturasViewController implements Initializable {
         if (event.getSource() == btnHome) {
             escenarioPrincipal.menuPrincipalView();
         }
+    }
+
+    public void imprimirReportes(){
+        Map parametros = new HashMap();
+        parametros.put("numeroFactura", null);
+        GenerarReportes.mostrarReporte("ReporteFactura.jasper", "Factura", parametros);
+
     }
 }

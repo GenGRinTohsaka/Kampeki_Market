@@ -12,6 +12,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +36,7 @@ import org.derianhernandez.bean.Productos;
 import org.derianhernandez.bean.Proveedores;
 import org.derianhernandez.bean.TipoProducto;
 import org.derianhernandez.db.Conexion;
+import org.derianhernandez.reportes.GenerarReportes;
 import org.derianhernandez.system.Main;
 
 /**
@@ -343,6 +346,9 @@ public class ProductosViewController implements Initializable {
 
     public void reporte() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReportes();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -480,6 +486,13 @@ public class ProductosViewController implements Initializable {
         
         event.consume(); 
         
+    }
+
+    public void imprimirReportes(){
+        Map parametros = new HashMap();
+        parametros.put("codigoProducto", null);
+        GenerarReportes.mostrarReporte("ReporteProducto.jasper", "Reporte de los Productos", parametros);
+
     }
 }
 

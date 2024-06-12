@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/MenuComprasController.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/MenuProveedoresController.java</file>
+            <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/MenuClientesController.java</file>
+            <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/resources/KampekiMarketCSS.css</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/DetalleCompraViewController.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/bean/Proveedores.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/TelefonoProveedorViewController.java</file>
@@ -12,10 +14,12 @@
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/system/Main.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/views/TelefonoProveedorView.fxml</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/controllers/ProductosViewController.java</file>
+            <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/bean/Productos.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/bean/Compras.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/bean/TelefonoProveedor.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/db/Conexion.java</file>
             <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/views/MenuPrincipalView.fxml</file>
+            <file>file:/C:/Users/mgm14/OneDrive/Escritorio/Kampeki_Market/src/org/derianhernandez/views/ProductosView.fxml</file>
         </group>
     </open-files>
 </project-private>

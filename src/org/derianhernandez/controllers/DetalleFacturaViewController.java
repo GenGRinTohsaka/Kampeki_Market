@@ -153,7 +153,7 @@ public class DetalleFacturaViewController implements Initializable {
                 lista.add(new Facturas(resultado.getInt("numeroFactura"),
                         resultado.getString("estado"),
                         resultado.getDouble("totalFactura"),
-                        resultado.getString("fechaFactura"),
+                        resultado.getDate("fechaFactura"),
                         resultado.getInt("codigoCliente"),
                         resultado.getInt("codigoEmpleado")));
             }
@@ -175,7 +175,7 @@ public class DetalleFacturaViewController implements Initializable {
                 resultado = new Facturas(registro.getInt("numeroFactura"),
                         registro.getString("estado"),
                         registro.getDouble("totalFactura"),
-                        registro.getString("fechaFactura"),
+                        registro.getDate("fechaFactura"),
                         registro.getInt("codigoCliente"),
                         registro.getInt("codigoEmpleado"));
 
@@ -231,7 +231,7 @@ public class DetalleFacturaViewController implements Initializable {
 
         DetalleFactura registro = new DetalleFactura();
         registro.setCodigoDetalleFactura(Integer.parseInt(txtCodigoDF.getText()));
-        registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
+        registro.setPrecioUnitario(0);
         registro.setCantidad(Integer.parseInt(txtCantidad.getText()));
         registro.setNumeroFactura(((Facturas) cmbCodigoF.getSelectionModel().getSelectedItem()).getNumeroFactura());
         registro.setCodigoProducto(((Productos) cmbCodigoP.getSelectionModel().getSelectedItem()).getCodigoProducto());
@@ -282,7 +282,7 @@ public class DetalleFacturaViewController implements Initializable {
 
     public void activarControles() {
         txtCodigoDF.setEditable(true);
-        txtPrecioU.setEditable(true);
+        txtPrecioU.setEditable(false);
         txtCantidad.setEditable(true);
         cmbCodigoF.setDisable(false);
         cmbCodigoP.setDisable(false);
