@@ -4,7 +4,14 @@ public class Usuarios {
     private String nombreUsuario;
     private String contraseña;
     private int nivelPermisos;
+    private static Usuarios instancia;
 
+    public static Usuarios obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new Usuarios();
+        }
+        return instancia;
+    }
     public Usuarios() {
     }
 

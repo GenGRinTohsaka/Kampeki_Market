@@ -48,7 +48,8 @@ public class LoginViewController implements Initializable {
                     
                     JOptionPane.showMessageDialog(null,"Bienvenido "+txtUsuario.getText(), "Bienvenida"
                     , nivelUsuario);
-                   
+                   Usuarios u = Usuarios.obtenerInstancia();
+                   u.setNivelPermisos(nivelUsuario);
                    escenarioPrincipal.menuPrincipalView();
                    
     

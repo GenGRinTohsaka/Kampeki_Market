@@ -20,11 +20,11 @@ import org.derianhernandez.system.Main;
 public class MenuPrincipalController implements Initializable {
 
     private Main escenarioPrincipal;
-    
+    Usuarios u = Usuarios.obtenerInstancia();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        desactivarBotones(u.getNivelPermisos());
         
 
     }
