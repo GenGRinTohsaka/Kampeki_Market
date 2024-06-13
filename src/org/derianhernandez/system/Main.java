@@ -58,7 +58,7 @@ public class Main extends Application {
 
         escenarioPrincipal.getIcons().add(new Image(Principal.class.getResourceAsStream("/org/derianhernandez/images/Logo.png")));
         //Este metodo tiene adentro otro para que se encargue de cargar la escena
-        menuPrincipalView();
+        loginView();
 
         //Este ya es el encargado de mostrar la escena
         escenarioPrincipal.show();
@@ -109,6 +109,7 @@ public class Main extends Application {
             e.printStackTrace();
 
         }
+        
     }
     /*
     Con este metodo nos encargamos de mandar los parametros a el metodo cambiarEscena

@@ -848,10 +848,10 @@ Delimiter ;
 
 -- -------------------------------------------------------------------------------------------  Usuarios ----------------------------------------------------------------------------------
 Delimiter $$
-	create procedure sp_AgregarUsuario(in nombreUsuario varchar(45), in contraseña varchar(100), in nivelUsuario int)
+	create procedure sp_AgregarUsuario(in nombreUsuario varchar(45), in contraseña varchar(100), in nivelPermisos int)
     Begin
-		Insert Into Usuarios(nombreUsuario,contraseña,nivelUsuario)
-			values(nombreUsuario,contraseña,nivelUsuario);
+		Insert Into Usuarios(nombreUsuario,contraseña,nivelPermisos)
+			values(nombreUsuario,contraseña,nivelPermisos);
     End $$
 Delimiter ; 
 
@@ -861,7 +861,7 @@ Delimiter $$
 		select 
 			U.nombreUsuario,
             U.contraseña,
-            U.nivelUsuario
+            U.nivelPermisos
 		from Usuarios U;
     End $$
 Delimiter ;
@@ -872,19 +872,19 @@ Delimiter $$
 		select 
 			U.nombreUsuario,
             U.contraseña,
-            U.nivelUsuario
+            U.nivelPermisos
 		from Usuarios U
         where U.nombreUsuario = _nombreUsuario;
     End $$
 Delimiter ;
 
 Delimiter $$
-	create procedure sp_ActualizarUsuario(in _nombreUsuario varchar(45), in _contraseña varchar(100), in _nivelUsuario int)
+	create procedure sp_ActualizarUsuario(in _nombreUsuario varchar(45), in _contraseña varchar(100), in _nivelPermisos int)
     Begin
 		update Usuarios U
 			set
                 U.contraseña = _contraseña,
-                U.nivelUsuario = _nivelUsuario
+                U.nivelPermisos = _nivelPermisos
 			where U.nombreUsuario = _nombreUsuario;
     End $$
 Delimiter ;
@@ -1093,6 +1093,7 @@ call sp_AgregarFactura(1,'Feliz',0,'2024/01/01',1,1);
 call sp_AgregarFactura(2,'Feliz',0,'2024/01/01',1,1);
 call sp_AgregarDetalleFactura(1,0,1,1,1);
 call sp_AgregarDetalleFactura(2,0,1,2,1);
+call sp_AgregarUsuario('RinTohsaka','Samedirection14',1);
 set global time_zone = '-6:00';
 -- --------------------------------------------------------------------------------------------------------------------------
 -- ------------------------------------------------ lIstar ------------------------------------------------------
@@ -1103,3 +1104,4 @@ call sp_ListarDetalleFactura();
 call sp_ListarEmpleados();
 call sp_ListarTelefonoProveedor();
 call sp_ListarReporteFactura(1);
+call sp_ListarUsuarios();
