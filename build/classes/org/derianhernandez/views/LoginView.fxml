@@ -32,9 +32,9 @@
                   <Font name="Tahoma Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="44.0" layoutY="133.0" prefHeight="30.0" prefWidth="220.0" promptText="Usuario" />
-            <PasswordField layoutX="44.0" layoutY="177.0" prefHeight="30.0" prefWidth="220.0" promptText="Contraseña" />
-            <Button layoutX="44.0" layoutY="223.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" text="Iniciar Sesion" />
+            <TextField fx:id="txtUsuario" layoutX="44.0" layoutY="133.0" prefHeight="30.0" prefWidth="220.0" promptText="Usuario" />
+            <PasswordField fx:id="pfContraseña" layoutX="44.0" layoutY="177.0" prefHeight="30.0" prefWidth="220.0" promptText="Contraseña" />
+            <Button fx:id="btnISesion" layoutX="44.0" layoutY="223.0" mnemonicParsing="false" onAction="#buttonHandleEvent" prefHeight="40.0" prefWidth="220.0" text="Iniciar Sesion" />
          </children>
       </AnchorPane>
    </children>
