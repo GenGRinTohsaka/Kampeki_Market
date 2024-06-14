@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4751ca5d-99e4-4563-bd3b-94669d6fb1c6">
-	<property name="ireport.zoom" value="0.826446280991739"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="443"/>
+	<property name="ireport.zoom" value="2.593742460100013"/>
+	<property name="ireport.x" value="213"/>
+	<property name="ireport.y" value="504"/>
 	<queryString>
 		<![CDATA[call sp_ListarClientes]]>
 	</queryString>
@@ -91,6 +91,9 @@
 				<reportElement x="439" y="31" width="70" height="20" uuid="fd8e6694-360c-4990-af2e-77a91bf7bf53"/>
 				<textFieldExpression><![CDATA[$F{telefonoCliente}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="28" y="66" width="493" height="1" uuid="dc8ad000-e71e-43d9-b31f-d02efd38435f"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>

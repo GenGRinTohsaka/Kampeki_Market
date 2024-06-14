@@ -111,6 +111,8 @@ public class MenuPrincipalController implements Initializable {
             btnProductos.setDisable(true);
             btnDetalleCompra.setDisable(true);
             btnCompras.setDisable(true);
+            btnTelefonoProveedor.setDisable(true);
+            btnCargoEmpleado.setDisable(true);
         } else if (nivelUsuario == 2) {
             btnProveedores.setDisable(false);
             btnEmpleados.setDisable(false);
@@ -118,6 +120,8 @@ public class MenuPrincipalController implements Initializable {
             btnProductos.setDisable(false);
             btnDetalleCompra.setDisable(false);
             btnCompras.setDisable(false);
+            btnTelefonoProveedor.setDisable(false);
+            btnCargoEmpleado.setDisable(false);
         }
 
     }

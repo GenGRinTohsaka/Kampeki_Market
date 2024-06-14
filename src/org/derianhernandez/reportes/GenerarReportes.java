@@ -10,6 +10,8 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.derianhernandez.db.Conexion;
 
+import javafx.stage.WindowEvent;
+
 /**
  *
  * @author Derian
@@ -23,6 +25,7 @@ public class GenerarReportes {
             JasperViewer visor = new JasperViewer(reporteImpreso);
             visor.setTitle(titulo);
             visor.setVisible(true);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
