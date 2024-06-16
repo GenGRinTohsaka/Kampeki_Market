@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteFactura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eca04e64-8e8a-4588-be9b-eaa8aed11c48">
 	<property name="ireport.zoom" value="0.9090909090909095"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="539"/>
+	<property name="ireport.y" value="596"/>
 	<parameter name="_numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -54,8 +54,8 @@
 	<background>
 		<band height="802" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="168" height="58" uuid="50d2ec22-7774-4d29-a705-c7b8a5113d82"/>
-				<imageExpression><![CDATA["/../images/Logo-removebg-preview.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="168" height="74" uuid="6c25845c-a7bb-4a34-8aac-02105939f315"/>
+				<imageExpression><![CDATA["C:\\Users\\mgm14\\OneDrive\\Escritorio\\Kampeki_Market\\Kampeki_Market\\src\\org\\derianhernandez\\images\\Logo-removebg-preview.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>

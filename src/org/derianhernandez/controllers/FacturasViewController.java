@@ -443,9 +443,10 @@ public class FacturasViewController implements Initializable {
     }
 
     public void imprimirReportes() {
+        GenerarReportes reporte = GenerarReportes.getInstancia();
         Map parametros = new HashMap();
         parametros.put("_numeroFactura",Integer.parseInt(txtNumeroF.getText()));
-        GenerarReportes.mostrarReporte("ReporteFactura.jasper", "Factura", parametros);
+        reporte.mostrarReporte("ReporteFactura.jasper", "Factura", parametros);
 
     }
 }
